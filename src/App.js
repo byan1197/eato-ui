@@ -29,7 +29,7 @@ class App extends Component {
             <div className="row">
 
                 {this.state.restaurants.map((restaurant, index) =>
-                    <div key={index} className="card m-2 col-md-3 col-sm-6 p-0">
+                    <div key={index} className="card m-4 col-md-2 col-sm-6 p-0">
                         <img className="card-img-top" src="https://whalebonemag.com/wp-content/uploads/2015/08/DSC_4647-Edit-1050x701.jpg" alt="Card image cap"></img>
                         <div className="card-body">
                           <h5 className="card-title">{restaurant.name}</h5>

@@ -22,7 +22,7 @@ class Nav extends Component {
     render() {
       return (
         <div className="Nav">
-            <div className="navbar navbar-expand-md navbar-dark bg-dark">
+            <div className="navbar navbar-expand-md bg-light py-2 px-5">
             <a href="/" className="navbar-brand">eatOttawa</a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar5">
                 <span className="navbar-toggler-icon"></span>
@@ -37,7 +37,7 @@ class Nav extends Component {
                     <div className="input-group">
                       <input type="text" className="form-control border-right-0" placeholder="Search Restaurants here"></input>
                       <div className="input-group-append">
-                        <button className="btn btn-outline-primary border-left-0" type="button"><span className="glyphicon glyphicons-search"></span></button>
+                        <button className="btn btn-outline-primary border-left-0" type="button"></button>
                       </div>
                     </div>
                 </form>
