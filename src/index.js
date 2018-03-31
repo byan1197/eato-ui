@@ -9,6 +9,9 @@ class App extends Component{
     constructor(props){
         super(props);
         
+        this.databaseQuery(' ');
+        
+        
         
         this.state={
             searchTerm: null,
@@ -16,6 +19,7 @@ class App extends Component{
             
 
         };
+    
         
     }
 
@@ -33,9 +37,14 @@ class App extends Component{
     }
 
     databaseQuery(term){
-        
-    
-        axios.get('http://localhost:7000/restau/?name=' + term)
+        var search;
+        if(term == ' '){
+            search = 'http://localhost:7000/restau/';
+        } else {
+            search = `http://localhost:7000/restau/?name=${term}`;
+        }
+        console.log(search.length);
+        axios.get(search)
             .then((response) => {
                 console.log("response", response);
                 this.setState({
@@ -46,13 +55,7 @@ class App extends Component{
             .catch( (error) => {
             console.log(error);
              });  
-        // .then((response) => response.json())
-        // .then((result)=>{
-        //     this.setState({
-        //         list: result
-        //     })
-        //     console.log(result)
-        // })
+        
     }
 
 }

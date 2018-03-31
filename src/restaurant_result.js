@@ -5,11 +5,7 @@ const RestaurantResult = (props) =>{
     if(restau == null){
         return <p>LOADING</p>;
     }
-    if (!(restau.constructor === Array)){
-        restau=[];
-        restau.push(props.rest);
-        console.log(restau)
-    }
+    
     return(
         
         <div className="RestaurantList">
