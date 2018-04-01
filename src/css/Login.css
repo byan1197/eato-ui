@@ -4,10 +4,12 @@ body{
 
 .login-card{
     width:30%;
+    top:100px;
     background-color: rgba(0,0,0,0.5);
 }
 
 .login-container{
+    padding: auto;
     display:flex;
     justify-content: center;
     align-items: center;

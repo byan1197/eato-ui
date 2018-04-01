@@ -56,8 +56,6 @@ class SearchBar extends Component{
 
     onInputChange(term){
         this.setState({ term });
-
-
     }
 }
 
