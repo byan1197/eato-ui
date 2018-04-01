@@ -4,34 +4,35 @@ import axios from 'axios';
 import SearchBar from './search_bar';
 import RestaurantResult from './restaurant_result';
 import registerServiceWorker from './registerServiceWorker';
+import {Route, BrowserRouter as Router} from 'react-router-dom';
+import Login from './Login'
+import Signup from './Signup'
 
 class App extends Component{
     constructor(props){
         super(props);
-        
+
         this.databaseQuery(' ');
-        
-        
-        
         this.state={
             searchTerm: null,
             list: []
-            
-
         };
-    
-        
     }
 
-    
-
-
     render(){
-        
+
         return (
             <div>
                 <SearchBar onSearchTermChange={searchTerm => this.databaseQuery(searchTerm)}/>
-                <RestaurantResult rest={this.state.list} />
+                <Router>
+                    <div>
+                        <Route path="/" exact render={
+                            <RestaurantResult rest={this.state.list}/>
+                        }/>
+                        <Route path="/login" component={Login}/>
+                        <Route path="/signup" component={Signup}/>
+                    </div>
+                </Router>
             </div>
         );
     }
@@ -50,21 +51,12 @@ class App extends Component{
                 this.setState({
                 list: response.data
                 });
-           
+
             })
             .catch( (error) => {
             console.log(error);
-             });  
-        
+             });
     }
-
 }
-    
-
 ReactDOM.render(<App />, document.getElementById('root'));
-
-
-
-
-
 registerServiceWorker();
