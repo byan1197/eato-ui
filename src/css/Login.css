@@ -1,0 +1,16 @@
+body{
+    background-image: url('https://rvca738f6h5tbwmj3mxylox3-wpengine.netdna-ssl.com/wp-content/uploads/2017/06/ALMY_CP9E2D_OttawaParlimentHill.jpg');
+}
+
+.login-card{
+    width:30%;
+    top:100px;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.login-container{
+    padding: auto;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}

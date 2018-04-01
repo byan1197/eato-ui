@@ -1,67 +1,33 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import SearchBar from './search_bar';
 import RestaurantResult from './restaurant_result';
 import registerServiceWorker from './registerServiceWorker';
-
-class App extends Component{
-    constructor(props){
-        super(props);
-        
-        this.databaseQuery(' ');
-        
-        
-        
-        this.state={
-            searchTerm: null,
-            list: []
-            
-
-        };
-    
-        
-    }
-
-    
+import Login from './Login'
+import Signup from './Signup'
+import App from './app';
 
 
-    render(){
-        
-        return (
-            <div>
-                <SearchBar onSearchTermChange={searchTerm => this.databaseQuery(searchTerm)}/>
-                <RestaurantResult rest={this.state.list} />
-            </div>
-        );
-    }
 
-    databaseQuery(term){
-        var search;
-        if(term == ' '){
-            search = 'http://localhost:7000/restau/';
-        } else {
-            search = `http://localhost:7000/restau/?name=${term}`;
-        }
-        console.log(search.length);
-        axios.get(search)
-            .then((response) => {
-                console.log("response", response);
-                this.setState({
-                list: response.data
-                });
-           
-            })
-            .catch( (error) => {
-            console.log(error);
-             });  
-        
-    }
 
-}
-    
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  
+    <BrowserRouter>
+      <div>
+        <Switch>
+          
+          <Route path="/login" component={Login}/>
+          <Route path="/signup" component={Signup}/>
+          <Route path="/" component={App} />
+
+        </Switch>
+      </div>
+    </BrowserRouter>
+  
+  , document.querySelector('.root'));
+
 
 
 
