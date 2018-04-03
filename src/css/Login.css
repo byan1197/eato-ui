@@ -14,3 +14,10 @@ body{
     justify-content: center;
     align-items: center;
 }
+
+
+#error-msg-container{
+    background-color: red;
+    height: 40px;
+    width:100%;
+}

@@ -5,3 +5,8 @@
 #logo-img {
     height:100px;
 }
+
+#profile-img {
+    border-radius: 50%;
+    height:50px;
+}

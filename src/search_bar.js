@@ -6,12 +6,13 @@ import './css/nav.css';
 class SearchBar extends Component{
     constructor(props){
         super(props);
-
+console.log(localStorage.getItem('uid'));
         this.state={
-            term : ' '
+            term : ''
         };
-
     }
+
+
 
     render(){
         return (
@@ -45,11 +46,24 @@ class SearchBar extends Component{
                         {
                             (localStorage.getItem('uid') == null) ?
                             <li className="nav-item active">
-                            <a className="btn btn-dark mx-2" href="/login">Sign In<span className="sr-only"></span>
-                            </a>
-                        </li> : null
+                                <a className="btn btn-dark mx-2" href="/login">Sign In<span className="sr-only"></span>
+                                </a>
+                            </li> :
+                            <li className="nav-item active">
+                                <div className="dropdown show">
+                                  <a className="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img id="profile-img" src={require('./img/profile.png')} />
+                                  </a>
+
+                                  <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a className="dropdown-item" href="#">Action</a>
+                                    <a className="dropdown-item" href="#">Another action</a>
+                                    <a className="dropdown-item" href="#">Something else here</a>
+                                  </div>
+                                </div>
+                            </li>
                         }
-                        
+
                     </ul>
                 </div>
                 </div>
