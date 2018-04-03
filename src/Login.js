@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import {BrowserRouter as Router, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Link, Redirect} from 'react-router-dom';
 import './css/Login.css';
 import axios from 'axios';
 
@@ -9,6 +9,8 @@ class Login extends Component {
     state = {
         username: '',
         password: '',
+        loggedIn: false,
+        uid: -1,
     }
 
     handlePassword = event => {
@@ -29,6 +31,13 @@ class Login extends Component {
         console.log(this.state.password);
         axios.post('http://localhost:7000/auth/login/', login_cred)
         .then(response => {
+            console.log(response.status);
+            if(response.status == 200){
+                this.setState({
+                    loggedIn:true,
+                });
+                localStorage.setItem('uid', response.data);
+            }
         	console.log(response)
         })
         .catch(error => {
@@ -40,6 +49,15 @@ class Login extends Component {
     }
 
     render(){
+
+        
+        if (this.state.loggedIn){
+            return(
+                <Redirect to="/" />
+                
+            );
+        }
+
         return(
             <div className="login-container p-auto h-100">
                 <div className="w-10 m-auto p-2 px-4 text-white login-card card">

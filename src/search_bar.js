@@ -42,10 +42,14 @@ class SearchBar extends Component{
                         </div>
                     </form>
                     <ul className="navbar-nav">
-                        <li className="nav-item active">
+                        {
+                            (localStorage.getItem('uid') == null) ?
+                            <li className="nav-item active">
                             <a className="btn btn-dark mx-2" href="/login">Sign In<span className="sr-only"></span>
                             </a>
-                        </li>
+                        </li> : null
+                        }
+                        
                     </ul>
                 </div>
                 </div>

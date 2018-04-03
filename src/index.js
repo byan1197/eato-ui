@@ -31,6 +31,8 @@ ReactDOM.render(
 
 
 
-
+  window.onbeforeunload = function() {
+    localStorage.clear();
+ }
 
 registerServiceWorker();
