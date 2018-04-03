@@ -31,7 +31,7 @@ class Login extends Component {
         console.log(this.state.password);
         axios.post('http://localhost:7000/auth/login/', login_cred)
         .then(response => {
-            console.log(response.status);
+            console.log(response);
             if(response.status == 200){
                 this.setState({
                     loggedIn:true,
