@@ -9,6 +9,7 @@ class Signup extends Component {
     state = {
         username: '',
         password: '',
+        name: '',
         loggedIn: false,
         confirmPassword: '',
         email: '',
@@ -35,6 +36,10 @@ class Signup extends Component {
         this.setState({type: event.target.value});
     }
 
+    handleName = event => {
+        this.setState({name: event.target.value});
+    }
+
     handleSubmit = event => {
         event.preventDefault();
         const login_cred = {
@@ -42,6 +47,7 @@ class Signup extends Component {
             password: this.state.password,
             email: this.state.email,
             type: this.state.type,
+            name: this.state.name,
             uid: -1,
             reputation: -1,
         }
@@ -83,6 +89,7 @@ class Signup extends Component {
                         <h1>Signup</h1>
                         <input onChange={this.handleUsername} ref="username" className="mb-2 form-control" id="username" placeholder="Username"required></input>
                         <input onChange={this.handleEmail} ref="email" type="email" className="mb-2 form-control" id="email" placeholder="Email"required></input>
+                        <input onChange={this.handleName} ref="name" type="name" className="mb-2 form-control" id="email" placeholder="Name"required></input>
                         <input onChange={this.handlePassword} ref="password" type="password" className="mb-2 form-control" id="pasword" placeholder="Password"required></input>
                         <input onChange={this.handleConfirmPassword} ref="password_confirm" type="password" className="mb-2 form-control" id="pasword_confirm" placeholder="Confirm Password"required></input>
                         
