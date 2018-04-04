@@ -37,7 +37,7 @@ class App extends Component{
         axios.get(search)
             .then((response) => {
                 console.log("response", response);
-                if(term == ' '){
+                if(term == ''){
                     this.setState({ allItems: response.data.map((rest,index)=> rest.name)})
                 }
                 this.setState({
