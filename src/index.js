@@ -8,7 +8,7 @@ import Login from './Login'
 import Signup from './Signup'
 import App from './app';
 import Ratings from './Ratings';
-
+import RestaurantIndex from './restaurant_index';
 
 ReactDOM.render(
 
@@ -16,6 +16,7 @@ ReactDOM.render(
       <div>
         <Switch>
           <Route path="/test" component={Ratings}/>
+          <Route path="/restaurant-index/:name" component={RestaurantIndex}/>
           <Route path="/login" component={Login}/>
           <Route path="/signup" component={Signup}/>
           <Route path="/" component={App} />
