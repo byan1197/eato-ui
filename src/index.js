@@ -9,15 +9,12 @@ import Signup from './Signup'
 import App from './app';
 
 
-
-
-
 ReactDOM.render(
-  
+
     <BrowserRouter>
       <div>
         <Switch>
-          
+
           <Route path="/login" component={Login}/>
           <Route path="/signup" component={Signup}/>
           <Route path="/" component={App} />
@@ -25,14 +22,14 @@ ReactDOM.render(
         </Switch>
       </div>
     </BrowserRouter>
-  
+
   , document.querySelector('.root'));
 
 
 
 
-  window.onbeforeunload = function() {
+window.onbeforeunload = function() {
     localStorage.clear();
- }
+}
 
 registerServiceWorker();

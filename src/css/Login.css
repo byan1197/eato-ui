@@ -14,3 +14,11 @@ body{
     justify-content: center;
     align-items: center;
 }
+
+
+#error-msg-container{
+    padding:5px;
+    text-align: center;
+    height: 40px;
+    width:100%;
+}
