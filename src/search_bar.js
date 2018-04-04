@@ -9,13 +9,23 @@ class SearchBar extends Component{
         super(props);
 console.log(localStorage.getItem('uid'));
         this.state={
-            term : ''
+            term : '',
+            select: '',
         };
     }
 
-
+    handleSelect = event => {
+        console.log('target ' + event.target.value);
+        this.setState({
+            select: event.target.value,
+            term: event.target.value
+        });
+    }
 
     render(){
+        if(this.props.allItems == []){
+            return null;
+        }
         return (
             <div className="Nav">
                 <div className="navbar navbar-expand-md py-2 px-5">
@@ -28,6 +38,14 @@ console.log(localStorage.getItem('uid'));
                 <div className="navbar-collapse collapse justify-content-stretch" id="navbar5">
                     <form className="ml-auto my-auto d-inline w-100">
                         <div className="input-group">
+                            
+                            <div className="input-group-append">
+                                <select onChange={this.handleSelect} className="custom-select" id="inputGroupSelect02">
+                                    <option value="" selected></option>
+                                    {this.props.allItems.map((restaurant, index) => <option key={index} value={restaurant}>{restaurant}</option>)}
+                                </select>
+                                
+                            </div>
                             <input type="text"
                                 className="input-group-prepend form-control w-75 border-right-0"
                                 placeholder="Search Restaurants here"
