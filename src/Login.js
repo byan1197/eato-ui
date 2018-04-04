@@ -57,7 +57,7 @@ class Login extends Component {
         const message = this.state.errorMsg;
         if (!message) return null;
         return(
-            <div id="error-msg-container">
+            <div id="error-msg-container" className="bg-danger">
                 <p className="mr-auto text-white">
                 {message}
                 </p>

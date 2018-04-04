@@ -8,25 +8,25 @@ import registerServiceWorker from './registerServiceWorker';
 class App extends Component{
     constructor(props){
         super(props);
-        
-        this.databaseQuery(' ');
-        
-        
-        
+
+        this.databaseQuery('');
+
+
+
         this.state={
             searchTerm: null,
             list: []
-            
+
 
         };
-    
-        
+
+
     }
 
-    
+
 
     render(){
-        
+
         return (
             <div>
                 <SearchBar onSearchTermChange={searchTerm => this.databaseQuery(searchTerm)}/>
@@ -37,7 +37,7 @@ class App extends Component{
 
     databaseQuery(term){
         var search;
-        if(term == ' '){
+        if(term == ''){
             search = 'http://localhost:7000/restau/';
         } else {
             search = `http://localhost:7000/restau/?name=${term}`;
@@ -49,12 +49,12 @@ class App extends Component{
                 this.setState({
                 list: response.data
                 });
-           
+
             })
             .catch( (error) => {
             console.log(error);
-             });  
-        
+             });
+
     }
 
 }
