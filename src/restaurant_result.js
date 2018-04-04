@@ -1,11 +1,14 @@
 import React from 'react';
 
+
 const RestaurantResult = (props) =>{
     var restau = props.rest;
+     
     if(restau == null){
         return <p>LOADING</p>;
     }
     
+
     return(
         
         <div className="RestaurantList">
