@@ -9,7 +9,7 @@ import Signup from './Signup'
 import App from './app';
 
 import Ratings from './Ratings';
-import RestaurantIndex from './restaurant_index';
+
 
 
 ReactDOM.render(
