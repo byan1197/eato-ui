@@ -4,6 +4,7 @@ import axios from 'axios';
 import SearchBar from './search_bar';
 import RestaurantDetail from './restaurant_detail';
 import registerServiceWorker from './registerServiceWorker';
+import Ratings from './Ratings';
 
 class RestaurantIndex extends Component{
     constructor(props){
@@ -12,9 +13,11 @@ class RestaurantIndex extends Component{
             id : this.props.match.params.id,
             restaurant: null,
         }
+
         console.log(this.state.id);
         this.databaseQuery(this.state.id);
        
+
     }
 
     render(){
@@ -25,12 +28,16 @@ class RestaurantIndex extends Component{
         
         return (
             <div>
+
                 <RestaurantDetail restaurant={this.state.restaurant}/>
+                <Ratings name={this.state.name}/>
+
             </div>
         );
     }
 
     databaseQuery(term){
+
         
         
         var search = `http://localhost:7000/restau/?id=${term}`;
@@ -48,6 +55,7 @@ class RestaurantIndex extends Component{
             .catch( (error) => {
             console.log(error);
              });
+
 
     }
 

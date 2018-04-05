@@ -14,6 +14,10 @@ console.log(localStorage.getItem('uid'));
         };
     }
 
+    logout(){
+        // localStorage.clear();
+    }
+
     handleSelect = event => {
         console.log('target ' + event.target.value);
         this.setState({
@@ -38,13 +42,12 @@ console.log(localStorage.getItem('uid'));
                 <div className="navbar-collapse collapse justify-content-stretch" id="navbar5">
                     <form className="ml-auto my-auto d-inline w-100">
                         <div className="input-group">
-                            
+
                             <div className="input-group-append">
-                                <select onChange={this.handleSelect} className="custom-select" id="inputGroupSelect02">
+                                <select onChange={this.handleSelect}  data-live-search="true" className="custom-select" id="inputGroupSelect02">
                                     <option value="" selected></option>
                                     {this.props.allItems.map((restaurant, index) => <option key={index} value={restaurant}>{restaurant}</option>)}
                                 </select>
-                                
                             </div>
                             <input type="text"
                                 className="input-group-prepend form-control w-75 border-right-0"
@@ -70,21 +73,11 @@ console.log(localStorage.getItem('uid'));
                         {
                             (localStorage.getItem('uid') == null) ?
                             <li className="nav-item active">
-                                <a className="btn btn-dark mx-2" href="/login">Sign In<span className="sr-only"></span>
+                                <a className="btn btn-warning mx-2" href="/login">Log In<FontAwesome name="sign-in-alt"/><span className="sr-only"></span>
                                 </a>
                             </li> :
                             <li className="nav-item active">
-                                <div className="dropdown show">
-                                  <button className="ml-2 btn btn-outline-warning dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <FontAwesome name="user"/>
-                                  </button>
-
-                                  <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a className="dropdown-item" href="#">Profile</a>
-                                    <a className="dropdown-item" href="#">Settings</a>
-                                    <a className="dropdown-item" href="#">Logout</a>
-                                  </div>
-                                </div>
+                                <a onClick={this.logout()} className="btn text-white btn-dark mx-2">Logout<FontAwesome name="sign-out-alt"/></a>
                             </li>
                         }
 
