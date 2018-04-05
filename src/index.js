@@ -17,7 +17,7 @@ ReactDOM.render(
         <Switch>
 
           <Route path="/test" component={Ratings}/>
-          <Route path="/restaurant-index/:name" component={RestaurantIndex}/>
+          <Route path="/restaurant-index/:id" component={RestaurantIndex}/>
           <Route path="/login" component={Login}/>
           <Route path="/signup" component={Signup}/>
 

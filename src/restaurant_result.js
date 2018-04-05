@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import FontAwesome from 'react-fontawesome';
 import RestaurantDetail from './restaurant_detail';
 import {BrowserRouter as Router, Link, Redirect} from 'react-router-dom';
+import Stars from './stars';
 
 class RestaurantResult extends Component{
     constructor(props){
@@ -12,24 +13,7 @@ class RestaurantResult extends Component{
             goTo: null,
         }
     }
-    renderStars(num){
-
-        if (num == 0){
-            return 'None';
-        }
-
-        var fullStars = Math.floor(num);
-        var halfStar = (num-fullStars) != 0;
-        var stars=[];
-
-        for (var i = 0 ; i < fullStars; i++){
-            stars.push(<FontAwesome name="star"/>);
-        }
-        if (halfStar) {
-            stars.push(<FontAwesome name="star-half"/>);
-        }
-        return stars;
-    }
+   
 
     
 
@@ -56,24 +40,24 @@ class RestaurantResult extends Component{
 
                 <div key={index} className="card m-4 col-md-2 col-sm-6 p-0">
 
-                <a onClick={() => this.setState({ goTo:restaurant.name })}>
+                <a onClick={() => this.setState({ goTo:restaurant.restaurantId })}>
                     <img className="card-img-top food-img" src={restaurant.picUrl}></img>
                         <div className="card-body">
                         <h5 className="card-title">{restaurant.name}</h5>
                             <div className="row">
                                 <div className="col-md-6">
-                                    <p className="card-text">Food: {this.renderStars(restaurant.foodRating)}</p>
+                                    <p className="card-text">Food: {Stars(restaurant.foodRating)}</p>
                                 </div>
                                 <div className="col-md-6">
-                                    <p className="card-text">Price: {this.renderStars(restaurant.priceRating)}</p>
+                                    <p className="card-text">Price: {Stars(restaurant.priceRating)}</p>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col-md-6">
-                                    <p className="card-text">Mood: {this.renderStars(restaurant.moodRating)}</p>
+                                    <p className="card-text">Mood: {Stars(restaurant.moodRating)}</p>
                                 </div>
                                 <div className="col-md-6">
-                                    <p className="card-text">Staff: {this.renderStars(restaurant.staffRating)}</p>
+                                    <p className="card-text">Staff: {Stars(restaurant.staffRating)}</p>
                                 </div>
                             </div>
                         </div>
