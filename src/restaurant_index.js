@@ -4,6 +4,7 @@ import axios from 'axios';
 import SearchBar from './search_bar';
 import RestaurantDetail from './restaurant_detail';
 import registerServiceWorker from './registerServiceWorker';
+import Ratings from './Ratings';
 
 class RestaurantIndex extends Component{
     constructor(props){
@@ -11,7 +12,7 @@ class RestaurantIndex extends Component{
         this.state={
             name : this.props.match.params.name,
         }
-       
+
     }
 
     render(){
@@ -19,12 +20,13 @@ class RestaurantIndex extends Component{
         return (
             <div>
                 <RestaurantDetail name={this.state.name}/>
+                <Ratings name={this.state.name}/>
             </div>
         );
     }
 
     databaseQuery(term){
-        
+
 
     }
 

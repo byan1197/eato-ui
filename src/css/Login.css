@@ -3,6 +3,7 @@ body{
     /*background-color: #E8E9EB;*/
     /*filter:blur(5px);*/
     background-size: cover;
+    background-attachment: fixed;
 }
 
 .login-card{
@@ -24,4 +25,9 @@ body{
     text-align: center;
     height: 40px;
     width:100%;
+}
+
+.card-header{
+    background-color: rgba(0,0,0,0);
+    margin-bottom:5px;
 }

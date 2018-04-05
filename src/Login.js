@@ -40,7 +40,6 @@ class Login extends Component {
                 });
                 localStorage.setItem('uid', response.data);
             }
-        	console.log(response)
         })
         .catch(error => {
             console.log(error.response);

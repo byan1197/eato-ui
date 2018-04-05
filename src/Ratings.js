@@ -2,25 +2,28 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './css/comment.css'
 import FontAwesome from 'react-fontawesome';
+import StarRatingComponent from 'react-star-rating-component';
+
+// onStarClick={} /* on icon click handler */
 
 class Ratings extends Component {
     constructor(props){
         super(props);
         this.state = {
             ratingList:[],
-            changed: false,
+            restId: this.props.match.params.id,
         };
         this.getRatings();
         console.log(this.state.ratingList);
     }
 
     getRatings(){
+        // axios.get('http://localhost:7000/rate/?restid={this.state.restId}')
         axios.get('http://localhost:7000/rate/?restid=2')
         .then((response)=>{
             console.log(response);
             this.setState({
                 ratingList: response.data,
-                changed: true,
             });
             console.log('from getRatings()');
             console.log(this.state.ratingList);
@@ -58,6 +61,62 @@ class Ratings extends Component {
         return stars;
     }
 
+    loggedInUsersOnly(){
+        if (localStorage.getItem('uid') != null){
+            return(
+                <div className="submit-your-own px-5 w-100">
+                    <p><b>Submit your own review:</b></p>
+                    <div className="row mb-2">
+                        <div className="col-md-5">
+                            <textarea className="form-control w-100"></textarea>
+                        </div>
+                        <div className="col-md-5">
+                            <p>Rate the service:</p>
+                        </div>
+                        <div className="col-md-1">
+                            <button type="submit" className="my-auto btn btn-outline-success">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            );
+        } else {
+            return(
+                <div className="bg-dark submit-your-own px-5 w-100">
+                    <p><b>Submit your own review:</b></p>
+                    <div className="row mb-2">
+                        <div className="col-md-5">
+                            <textarea disabled className="form-control w-100"></textarea>
+                        </div>
+                        <div className="col-md-5">
+                            <p>Rate the service:</p>
+                            <StarRatingComponent
+                                name="foodRating"/* name of the radio input, it is required */
+                                value="0" /* number of selected icon (`0` - none, `1` - first) */
+                            />
+                        </div>
+                        <div className="col-md-1">
+                            <button type="submit" className="my-auto btn btn-outline-success">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+    }
+
+    upvote(raterid){
+        axios.get('http://localhost:7000/upvote-rater/?restid={this.state.restId}&raterid={raterid}')
+        .then((response)=>{
+            console.log(response);
+            this.setState({
+                ratingList: response.data,
+                changed: true,
+            });
+            console.log('from getRatings()');
+            console.log(this.state.ratingList);
+        });
+    }
+
     render(){
         if(this.state.changed){
             console.log("state has been changed.");
@@ -66,52 +125,61 @@ class Ratings extends Component {
 
         var ratings = this.state.ratingList;
         return (
-
-            <div className="card m-4 p-4">
-                <h4 className="text-secondary">Ratings</h4>
-                {
-                    ratings.map((rating, index)=>
-                        <div className="my-1 card comment-card">
-                          <div className="row">
-                            <div className="align-middle col-md-2">
-                                <h5>{rating.username}</h5>
-                                <img className="mx-auto" id="logo-img" src={require('./img/profile.png')} />
-                                {this.showRep(rating.reputation)}
-                            </div>
-                            <div className="col-md-7">
-                                <p>{rating.comments}</p>
-                            </div>
-                            <div className="col-md-2">
-                                <div className="row">
-                                    <div className="col-md-6">
-                                        Food:
-                                        <p className="text-warning">{this.renderStars(rating.food)}</p>
-                                    </div>
-                                    <div className="col-md-6">
-                                        Mood:
-                                        <p className="text-warning">{this.renderStars(rating.mood)}</p>
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col-md-6">
-                                        Price:
-                                        <p className="text-warning">{this.renderStars(rating.price)}</p>
-                                    </div>
-                                    <div className="col-md-6">
-                                        Staff:
-                                        <p className="text-warning">{this.renderStars(rating.staff)}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-md-1">
-                                <a className="vote-button"><h1 className="text-success"><FontAwesome name="thumbs-up"/></h1></a>
-                                <a className="vote-button"><h1 className="text-danger"><FontAwesome name="thumbs-down"/></h1></a>
-                            </div>
-                          </div>
+            <div className="row">
+                <div className="col-md-1"></div>
+                <div className="col-md-10">
+                    <div className="card m-4 p-4">
+                        <div className="card-header">
+                            <h4 className="text-secondary">Ratings</h4>
+                            {
+                                this.loggedInUsersOnly()
+                            }
                         </div>
-                    )
-                }
+                        {
+                            ratings.map((rating, index)=>
+                                <div className="my-1 px-5 py-2 card comment-card">
+                                  <div className="row">
+                                    <div className="col-md-2">
+                                        <h5>{rating.username}<FontAwesome name="user"/></h5>
+                                        {this.showRep(rating.reputation)}
+                                    </div>
+                                    <div className="col-md-7">
+                                        <p>{rating.comments}</p>
+                                    </div>
+                                    <div className="col-md-2">
+                                        <div className="row">
+                                            <div className="col-md-6">
+                                                Food:
+                                                <p className="text-warning">{this.renderStars(rating.food)}</p>
+                                            </div>
+                                            <div className="col-md-6">
+                                                Mood:
+                                                <p className="text-warning">{this.renderStars(rating.mood)}</p>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-md-6">
+                                                Price:
+                                                <p className="text-warning">{this.renderStars(rating.price)}</p>
+                                            </div>
+                                            <div className="col-md-6">
+                                                Staff:
+                                                <p className="text-warning">{this.renderStars(rating.staff)}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-1">
+                                        <p>Was this helpful?</p>
+                                        <a onClick={this.upvote(rating.id)} className="upvote-button"><p><FontAwesome name="thumbs-up"/></p></a>
+                                        <a className="downvote-button"><p><FontAwesome name="thumbs-down"/></p></a>
+                                    </div>
+                                  </div>
+                                </div>
+                            )
+                        }
 
+                    </div>
+                </div>
             </div>
         );
     }

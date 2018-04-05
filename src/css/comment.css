@@ -1,4 +1,11 @@
 .comment-card{
     border-radius: 25px;
-    padding:15px;
+}
+
+.upvote-button:focus{
+    color: green;
+}
+
+.downvote-button:focus{
+    color: red;
 }
