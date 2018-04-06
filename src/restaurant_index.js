@@ -30,7 +30,7 @@ class RestaurantIndex extends Component{
             <div>
 
                 <RestaurantDetail restaurant={this.state.restaurant}/>
-                <Ratings name={this.state.name}/>
+                <Ratings id={this.state.id}/>
 
             </div>
         );

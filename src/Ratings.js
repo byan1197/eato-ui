@@ -16,7 +16,7 @@ class Ratings extends Component {
             staff: 0,
             comments:'',
             ratingList:[],
-            restId: 6, //MUST CHANGE THIS LATER!!!
+            restId: this.props.id, //MUST CHANGE THIS LATER!!!
         };
         this.getRatings();
         console.log(this.state.ratingList);
