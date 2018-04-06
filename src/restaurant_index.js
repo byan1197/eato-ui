@@ -16,7 +16,7 @@ class RestaurantIndex extends Component{
 
         console.log(this.state.id);
         this.databaseQuery(this.state.id);
-       
+
 
     }
 
@@ -25,7 +25,7 @@ class RestaurantIndex extends Component{
             return(<p>Loading</p>);
         }
         console.log(this.state.restaurant);
-        
+
         return (
             <div>
 
@@ -38,19 +38,19 @@ class RestaurantIndex extends Component{
 
     databaseQuery(term){
 
-        
+
         
         var search = `http://localhost:7000/restau/?id=${term}`;
-        
+
         console.log(search);
         axios.get(search)
             .then((response) => {
-                
-                
+
+
                 this.setState({
                 restaurant: response.data[0]
                 });
-                
+
             })
             .catch( (error) => {
             console.log(error);
