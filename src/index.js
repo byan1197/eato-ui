@@ -10,10 +10,8 @@ import App from './app';
 
 import Ratings from './Ratings';
 
-
-
 ReactDOM.render(
-    
+
     <BrowserRouter>
       <div>
         <Switch>
@@ -30,12 +28,5 @@ ReactDOM.render(
     </BrowserRouter>
 
   , document.querySelector('.root'));
-
-
-
-
-window.onbeforeunload = function() {
-    localStorage.clear();
-}
 
 registerServiceWorker();
