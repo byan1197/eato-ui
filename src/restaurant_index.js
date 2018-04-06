@@ -48,15 +48,14 @@ class RestaurantIndex extends Component{
             
             <div style={margin}>
                 <RestaurantDetail restaurant={this.state.restaurant} locations = {this.state.locations}/>
+
                 <Switch
           
                 onChange={this.handleChange('checkedB')}
                 value="checkedA"
                 color="Secondary"
                 />
-                <Ratings name={this.state.name}/> 
-
-
+                <Ratings id={this.state.id}/>
             </div>
         );
     }
