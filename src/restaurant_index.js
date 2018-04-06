@@ -5,6 +5,9 @@ import SearchBar from './search_bar';
 import RestaurantDetail from './restaurant_detail';
 import registerServiceWorker from './registerServiceWorker';
 import Ratings from './Ratings';
+import Switches from './switch';
+import Switch from 'material-ui/Switch';
+
 
 class RestaurantIndex extends Component{
     constructor(props){
@@ -13,6 +16,8 @@ class RestaurantIndex extends Component{
             id : this.props.match.params.id,
             restaurant: null,
             locations: null,
+            checkedA: false,
+            checkedB: true,
         }
 
         console.log(this.state.id);
@@ -23,16 +28,33 @@ class RestaurantIndex extends Component{
 
 
     }
+    handleChange = name => event => {
+        this.setState({ [name]: event.target.checked });
+      };
 
     render(){
+        const margin={
+            margin:"5% 20% 5% 20%",
+           //   backgroundColor: "rgba(255,255,255,0)",
+           //  border: "none",
+             
+        }
         if(this.state.restaurant == null || this.state.locations == null){
             return(<p>Loading</p>);
         }
-        console.log(this.state.restaurant);
+        console.log(this.state.checkedB);
 
         return (
-            <div>
+            
+            <div style={margin}>
                 <RestaurantDetail restaurant={this.state.restaurant} locations = {this.state.locations}/>
+
+                <Switch
+          
+                onChange={this.handleChange('checkedB')}
+                value="checkedA"
+                color="Secondary"
+                />
                 <Ratings id={this.state.id}/>
             </div>
         );
