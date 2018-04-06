@@ -7,6 +7,7 @@ import Stars from './stars';
 
 
 
+
 class RestaurantDetail extends Component{
     constructor(props){
         super(props);
@@ -31,15 +32,13 @@ class RestaurantDetail extends Component{
          }
 
          const padding={
-             margin:"5% 20% 5% 20%",
+            //  margin:"5% 20% 5% 20%",
             //   backgroundColor: "rgba(255,255,255,0)",
             //  border: "none",
               
          }
 
-         const table={
-             width:"20%",
-         }
+         
         
          if(this.props.restaurant == null){
              return(<p>Loading</p>);
@@ -60,7 +59,7 @@ class RestaurantDetail extends Component{
                     </div>
                     <div className="col-md-6">
                         <h1>Locations</h1>
-                        <table className="table" style={table}>
+                        <table className="table" >
                             <thead>
                                 <tr>
                                 <th scope="col">Address</th>
@@ -89,6 +88,7 @@ class RestaurantDetail extends Component{
                             </table>
                     </div>
                 </div>
+                
             </div>
            
         );
