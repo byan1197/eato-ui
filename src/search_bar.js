@@ -15,7 +15,8 @@ console.log(localStorage.getItem('uid'));
     }
 
     logout(){
-        // localStorage.clear();
+        localStorage.removeItem('uid');
+        this.forceUpdate();
     }
 
     handleSelect = event => {
@@ -30,6 +31,7 @@ console.log(localStorage.getItem('uid'));
         if(this.props.allItems == []){
             return null;
         }
+
         return (
             <div className="Nav">
                 <div className="navbar navbar-expand-md py-2 px-5">
@@ -71,14 +73,13 @@ console.log(localStorage.getItem('uid'));
                     </form>
                     <ul className="navbar-nav">
                         {
-                            (localStorage.getItem('uid') == null) ?
+                            (!localStorage.getItem('uid')) ?
                             <li className="nav-item active">
                                 <a className="btn btn-warning mx-2" href="/login">Log In<FontAwesome name="sign-in-alt"/><span className="sr-only"></span>
                                 </a>
-                            </li> :
-                            <li className="nav-item active">
-                                <a onClick={this.logout()} className="btn text-white btn-dark mx-2">Logout<FontAwesome name="sign-out-alt"/></a>
-                            </li>
+                            </li>:<li className="nav-item active">
+                                <button onClick={()=>{this.logout()}} className="btn text-white btn-dark mx-2">Logout<FontAwesome name="sign-out-alt"/></button>
+                            </li>                     
                         }
 
                     </ul>

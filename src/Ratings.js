@@ -10,16 +10,65 @@ class Ratings extends Component {
     constructor(props){
         super(props);
         this.state = {
+            food: 0,
+            mood: 0,
+            price: 0,
+            staff: 0,
+            comments:'',
             ratingList:[],
-            restId: this.props.match.params.id,
+            restId: 6, //MUST CHANGE THIS LATER!!!
         };
         this.getRatings();
         console.log(this.state.ratingList);
     }
 
+    handleComment = event =>{
+        this.setState({
+            comments:event.target.value,
+        })
+    }
+
+    onFoodStarClick(nextValue, prevValue, name) {
+      console.log(nextValue);
+      this.setState({
+          food:nextValue,
+      });
+    }
+    onMoodStarClick(nextValue, prevValue, name) {
+      console.log(nextValue);
+      this.setState({
+          mood:nextValue,
+      });
+    }
+    onStaffStarClick(nextValue, prevValue, name) {
+      console.log(nextValue);
+      this.setState({
+          staff:nextValue,
+      });
+    }
+    onPriceStarClick(nextValue, prevValue, name) {
+      console.log(nextValue);
+      this.setState({
+          price:nextValue,
+      });
+    }
+
+    submitRating(){
+        const newRating = {
+            userId: localStorage.getItem('uid'),
+            date: null,
+            price: this.state.price,
+            food: this.state.food,
+            mood: this.state.mood,
+            staff: this.state.staff,
+            comments: this.state.comments,
+            restaurantId: this.state.restId,
+        }
+    }
+
     getRatings(){
         // axios.get('http://localhost:7000/rate/?restid={this.state.restId}')
-        axios.get('http://localhost:7000/rate/?restid=2')
+        axios.get('http://localhost:7000/rate/?restid=6')
         .then((response)=>{
             console.log(response);
             this.setState({
@@ -64,38 +113,62 @@ class Ratings extends Component {
     loggedInUsersOnly(){
         if (localStorage.getItem('uid') != null){
             return(
-                <div className="submit-your-own px-5 w-100">
+                <div className="mb-1 submit-your-own px-5 w-100">
                     <p><b>Submit your own review:</b></p>
                     <div className="row mb-2">
                         <div className="col-md-5">
-                            <textarea className="form-control w-100"></textarea>
+                            <textarea className="h-100 form-control w-100"></textarea>
                         </div>
                         <div className="col-md-5">
-                            <p>Rate the service:</p>
+                            <p><b>Rate the service:</b></p>
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <p>Food:</p>
+                                    <StarRatingComponent
+                                        name="foodRating"/* name of the radio input, it is required */
+                                        value={this.state.food} /* number of selected icon (`0` - none, `1` - first) */
+                                        onStarClick={this.onFoodStarClick.bind(this)}
+                                    />
+                                    <p>Mood:</p>
+                                    <StarRatingComponent
+                                        name="priceRating"/* name of the radio input, it is required */
+                                        value={this.state.price} /* number of selected icon (`0` - none, `1` - first) */
+                                        onStarClick={this.onPriceStarClick.bind(this)}
+                                    />
+                                </div>
+                                <div className="col-md-6">
+                                    <p>Staff:</p>
+                                    <StarRatingComponent
+                                        name="staffRating"/* name of the radio input, it is required */
+                                        value={this.state.staff} /* number of selected icon (`0` - none, `1` - first) */
+                                        onStarClick={this.onStaffStarClick.bind(this)}
+                                    />
+                                    <p>Mood:</p>
+                                    <StarRatingComponent
+                                        name="moodRating"/* name of the radio input, it is required */
+                                        value={this.state.mood} /* number of selected icon (`0` - none, `1` - first) */
+                                        onStarClick={this.onMoodStarClick.bind(this)}
+                                    />
+                                </div>
+                            </div>
+
                         </div>
                         <div className="col-md-1">
-                            <button type="submit" className="my-auto btn btn-outline-success">Submit</button>
+                            <button type="submit" onClick={()=>{this.submitRating()}} className="my-auto btn btn-outline-success">Submit</button>
                         </div>
                     </div>
                 </div>
             );
         } else {
             return(
-                <div className="bg-dark submit-your-own px-5 w-100">
+                <div className="bg-secondary mb-1 submit-your-own px-5 w-100">
                     <p><b>Submit your own review:</b></p>
                     <div className="row mb-2">
-                        <div className="col-md-5">
-                            <textarea disabled className="form-control w-100"></textarea>
-                        </div>
-                        <div className="col-md-5">
-                            <p>Rate the service:</p>
-                            <StarRatingComponent
-                                name="foodRating"/* name of the radio input, it is required */
-                                value="0" /* number of selected icon (`0` - none, `1` - first) */
-                            />
+                        <div className="col-md-11">
+                            <textarea disabled className="form-control w-100">Please login to submit a review.</textarea>
                         </div>
                         <div className="col-md-1">
-                            <button type="submit" className="my-auto btn btn-outline-success">Submit</button>
+                            <button type="submit" disabled className="my-auto btn btn-outline-success">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -105,17 +178,33 @@ class Ratings extends Component {
     }
 
     upvote(raterid){
-        axios.get('http://localhost:7000/upvote-rater/?restid={this.state.restId}&raterid={raterid}')
-        .then((response)=>{
-            console.log(response);
-            this.setState({
-                ratingList: response.data,
-                changed: true,
-            });
-            console.log('from getRatings()');
-            console.log(this.state.ratingList);
-        });
+        console.log('upvoted!');
+        // axios.get('http://localhost:7000/upvote-rater/?restid={this.state.restId}&raterid={raterid}')
+        // .then((response)=>{
+        //     console.log(response);
+        //     this.setState({
+        //         ratingList: response.data,
+        //         changed: true,
+        //     });
+        //     console.log('from getRatings()');
+        //     console.log(this.state.ratingList);
+        // });
     }
+
+    downvote(raterid){
+        console.log('downvoted!');
+        // axios.get('http://localhost:7000/upvote-rater/?restid={this.state.restId}&raterid={raterid}')
+        // .then((response)=>{
+        //     console.log(response);
+        //     this.setState({
+        //         ratingList: response.data,
+        //         changed: true,
+        //     });
+        //     console.log('from getRatings()');
+        //     console.log(this.state.ratingList);
+        // });
+    }
+
 
     render(){
         if(this.state.changed){
@@ -124,6 +213,25 @@ class Ratings extends Component {
         }
 
         var ratings = this.state.ratingList;
+        if (ratings.length ==0){
+            return(
+                <div className="row">
+                    <div className="col-md-1"></div>
+                    <div className="col-md-10">
+                        <div className="card m-4 p-4">
+                            <div className="card-header">
+                                <h4 className="text-secondary">Ratings</h4>
+                                {
+                                    this.loggedInUsersOnly()
+                                }
+                            </div>
+                            <h4 className="text-center text-secondary">There seems to be no reviews...</h4>
+                            <p className="text-center"><b>write one now!</b></p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
         return (
             <div className="row">
                 <div className="col-md-1"></div>
@@ -137,14 +245,14 @@ class Ratings extends Component {
                         </div>
                         {
                             ratings.map((rating, index)=>
-                                <div className="my-1 px-5 py-2 card comment-card">
+                                <div key={index} className="my-1 px-5 py-2 card comment-card">
                                   <div className="row">
                                     <div className="col-md-2">
                                         <h5>{rating.username}<FontAwesome name="user"/></h5>
                                         {this.showRep(rating.reputation)}
                                     </div>
                                     <div className="col-md-7">
-                                        <p>{rating.comments}</p>
+                                        <p>{rating.comments==''?'No comment.':rating.comments}</p>
                                     </div>
                                     <div className="col-md-2">
                                         <div className="row">
@@ -170,8 +278,8 @@ class Ratings extends Component {
                                     </div>
                                     <div className="col-md-1">
                                         <p>Was this helpful?</p>
-                                        <a onClick={this.upvote(rating.id)} className="upvote-button"><p><FontAwesome name="thumbs-up"/></p></a>
-                                        <a className="downvote-button"><p><FontAwesome name="thumbs-down"/></p></a>
+                                        <a onClick={()=>{this.upvote(rating.id)}} className="upvote-button"><p><FontAwesome name="thumbs-up"/></p></a>
+                                        <a onClick={()=>{this.downvote(rating.id)}} className="downvote-button"><p><FontAwesome name="thumbs-down"/></p></a>
                                     </div>
                                   </div>
                                 </div>
