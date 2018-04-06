@@ -13,9 +13,9 @@ class RestaurantResult extends Component{
             goTo: null,
         }
     }
-   
 
-    
+
+
 
     render(){
         if(this.state.goTo != null){
@@ -23,7 +23,7 @@ class RestaurantResult extends Component{
             console.log(url);
             return(
                 <Redirect to={url} />
-                
+
             );
         }
         var restau = this.props.rest;
@@ -38,10 +38,10 @@ class RestaurantResult extends Component{
 
             {restau.map((restaurant, index) =>
 
-                <div key={index} className="card m-4 col-md-2 col-sm-6 p-0">
+                <div key={index} className="card restau-card m-4 col-md-2 col-sm-6 p-0">
 
                 <a onClick={() => this.setState({ goTo:restaurant.restaurantId })}>
-                    <img className="card-img-top food-img" src={restaurant.picUrl}></img>
+                    <img className="card-img-top food-img" src={restaurant.picUrl} alt="http://prachyanat.org/wp-content/uploads/2014/08/placeholder1-300x300.jpg"></img>
                         <div className="card-body">
                         <h5 className="card-title">{restaurant.name}</h5>
                             <div className="row">

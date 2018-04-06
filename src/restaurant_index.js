@@ -16,9 +16,11 @@ class RestaurantIndex extends Component{
         }
 
         console.log(this.state.id);
+
         this.databaseQuery('restau','id',this.state.id);
         this.databaseQuery('location','restauId',this.state.id);
        
+
 
     }
 
@@ -27,7 +29,7 @@ class RestaurantIndex extends Component{
             return(<p>Loading</p>);
         }
         console.log(this.state.restaurant);
-        
+
         return (
             <div>
                 <RestaurantDetail restaurant={this.state.restaurant} locations = {this.state.locations}/>
@@ -41,7 +43,6 @@ class RestaurantIndex extends Component{
 
 
     databaseQuery(type,param,term){
-
         
         var search = `http://localhost:7000/${type}/?${param}=${term}`;
         console.log(search);
@@ -62,6 +63,7 @@ class RestaurantIndex extends Component{
                     console.log(response.data);
                 }
                 
+
             })
             .catch( (error) => {
             console.log(error);
