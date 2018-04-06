@@ -11,38 +11,48 @@ class RestaurantIndex extends Component{
         this.state={
             id : this.props.match.params.id,
             restaurant: null,
+            locations: null,
         }
         console.log(this.state.id);
-        this.databaseQuery(this.state.id);
+        this.databaseQuery('restau','id',this.state.id);
+        this.databaseQuery('location','restauId',this.state.id);
        
     }
 
     render(){
-        if(this.state.restaurant==null){
+        if(this.state.restaurant == null || this.state.locations == null){
             return(<p>Loading</p>);
         }
         console.log(this.state.restaurant);
         
         return (
             <div>
-                <RestaurantDetail restaurant={this.state.restaurant}/>
+                <RestaurantDetail restaurant={this.state.restaurant} locations = {this.state.locations}/>
             </div>
         );
     }
 
-    databaseQuery(term){
+    databaseQuery(type,param,term){
         
         
-        var search = `http://localhost:7000/restau/?id=${term}`;
-        
+        var search = `http://localhost:7000/${type}/?${param}=${term}`;
+        console.log(search);
         console.log(search);
         axios.get(search)
             .then((response) => {
                 
-                
-                this.setState({
-                restaurant: response.data[0]
-                });
+                if(type == 'restau'){
+                    this.setState({
+                        restaurant: response.data[0]
+                        });
+                }
+
+                else if(type == 'location'){
+                    this.setState({
+                        locations: response.data
+                        });
+                    console.log(response.data);
+                }
                 
             })
             .catch( (error) => {
