@@ -10,7 +10,7 @@ class RestaurantIndex extends Component{
     constructor(props){
         super(props);
         this.state={
-            id : this.props.match.params.id,
+            id : this.props.id,
             restaurant: null,
             locations: null,
         }
@@ -32,7 +32,7 @@ class RestaurantIndex extends Component{
             <div>
                 <RestaurantDetail restaurant={this.state.restaurant} locations = {this.state.locations}/>
 
-                <Ratings name={this.state.name}/>
+                 <Ratings name={this.state.name}/> 
 
 
             </div>
