@@ -10,7 +10,7 @@ class RestaurantIndex extends Component{
     constructor(props){
         super(props);
         this.state={
-            id : this.props.id,
+            id : this.props.match.params.id,
             restaurant: null,
             locations: null,
         }
@@ -45,8 +45,8 @@ class RestaurantIndex extends Component{
     databaseQuery(type,param,term){
         
         var search = `http://localhost:7000/${type}/?${param}=${term}`;
-        console.log(search);
-        console.log(search);
+        console.log("this is da search " + search);
+        
         axios.get(search)
             .then((response) => {
                 
