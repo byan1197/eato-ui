@@ -7,11 +7,42 @@ import FontAwesome from 'react-fontawesome';
 class SearchBar extends Component{
     constructor(props){
         super(props);
-console.log(localStorage.getItem('uid'));
         this.state={
             term : '',
             select: '',
+            searchType:'restaurantName',
         };
+    }
+
+    handleSearchBarChange = event => {
+        this.setState({
+            searchType: event.target.value,
+        })
+    }
+
+    renderSearchOrDropdown(){
+        if (this.state.searchType==='managerByCategory'){
+            return(<select
+            className="input-group-prepend form-control w-75 border-right-0"
+            >
+                <option>testtest</option>
+            </select>);
+        }
+        else if (this.state.searchType==='restaurantType'){
+            return(<select
+            className="input-group-prepend form-control w-75 border-right-0"
+            >
+                <option>testtest</option>
+            </select>);
+        }
+        else {
+            return(<input type="text"
+                className="input-group-prepend form-control w-75 border-right-0"
+                placeholder="Search here"
+                value={this.state.term}
+                onChange={event => this.onInputChange(event.target.value)}>
+            </input>);
+        }
     }
 
     logout(){
@@ -28,10 +59,7 @@ console.log(localStorage.getItem('uid'));
     }
 
     render(){
-        if(this.props.allItems == []){
-            return null;
-        }
-
+        console.log(this.state.searchType);
         return (
             <div className="Nav">
                 <div className="navbar navbar-expand-md py-2 px-5">
@@ -44,24 +72,14 @@ console.log(localStorage.getItem('uid'));
                 <div className="navbar-collapse collapse justify-content-stretch" id="navbar5">
                     <form className="ml-auto my-auto d-inline w-100">
                         <div className="input-group">
-
-                            <div className="input-group-append">
-                                <select onChange={this.handleSelect}  data-live-search="true" className="custom-select" id="inputGroupSelect02">
-                                    <option value="" selected></option>
-                                    {this.props.allItems.map((restaurant, index) => <option key={index} value={restaurant}>{restaurant}</option>)}
-                                </select>
-                            </div>
-                            <input type="text"
-                                className="input-group-prepend form-control w-75 border-right-0"
-                                placeholder="Search Restaurants here"
-                                value={this.state.term}
-                                onChange={event => this.onInputChange(event.target.value)}>
-                            </input>
-                            <select className="w-20 input-group form-control">
-                                <option selected>Choose...</option>
-                                <option value="1">Restaurants</option>
-                                <option value="2">Locations</option>
-                                <option value="3">Raters</option>
+                            {this.renderSearchOrDropdown()}
+                            <select onChange={this.handleSearchBarChange} className="w-20 input-group form-control">
+                                <option selected value="restaurantName">Restaurants</option>
+                                <option value="locations">Locations</option>
+                                <option value="raters">Raters</option>
+                                <option value="restaurantType">Restaurant Type</option>
+                                <option value="managerCategory">Manager By Category</option>
+                                <option value="restaurantsLowerThan">Restaurants Lower Than:</option>
                             </select>
                             <div className="input-group-append">
                                 <button
@@ -77,9 +95,11 @@ console.log(localStorage.getItem('uid'));
                             <li className="nav-item active">
                                 <a className="btn btn-warning mx-2" href="/login">Log In<FontAwesome name="sign-in-alt"/><span className="sr-only"></span>
                                 </a>
-                            </li>:<li className="nav-item active">
-                                <button onClick={()=>{this.logout()}} className="btn text-white btn-dark mx-2">Logout<FontAwesome name="sign-out-alt"/></button>
-                            </li>                     
+                            </li>:
+                            <li className="nav-btn-group nav-item active">
+                                <button className="nav-bar-btn btn btn-warning mx-2"><FontAwesome name="user"/>My Profile</button>
+                                <button onClick={()=>{this.logout()}} className="nav-bar-btn btn text-white btn-dark mr-2"> <FontAwesome name="sign-out"/>Logout</button>
+                            </li>
                         }
 
                     </ul>

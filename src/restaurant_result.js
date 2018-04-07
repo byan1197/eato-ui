@@ -15,16 +15,10 @@ class RestaurantResult extends Component{
         }
     }
 
-
-
-    
     render(){
         const styles = {
-            
-               
-
         }
-        
+
         var restau = this.props.rest;
         if(restau == null){
             return <p>LOADING</p>;
@@ -32,17 +26,17 @@ class RestaurantResult extends Component{
         return(
 
 <div className="RestaurantList">
-    <div className="container-fluid">
+    <div className="container-fluid pl-5 px-2">
         <div className="row">
 
             {restau.map((restaurant, index) =>
 
-                <div key={index} className="card restau-card m-4 col-md-2 col-sm-6 p-0">
+                <div key={index} className="card restau-card m-3 col-md-2 col-sm-6 p-0">
 
-             
+
              <Link to = {`/restaurant-index/${restaurant.restaurantId}`} >
-                    <img className="card-img-top food-img" src={restaurant.picUrl == null ? "http://prachyanat.org/wp-content/uploads/2014/08/placeholder1-300x300.jpg" : restaurant.picUrl}></img>
-                    </Link>       
+                    <img className="card-img-top food-img" src={restaurant.picUrl == null ? "https://shoesonloose.com/SOL/static/images/notfound_placeholder.svg" : restaurant.picUrl}></img>
+                    </Link>
                         <div className="card-body" >
                         <h5 className="card-title">{restaurant.name}</h5>
                             <div className="row" >
@@ -61,7 +55,7 @@ class RestaurantResult extends Component{
                                     <p className="card-text">Staff: {Stars(restaurant.staffRating)}</p>
                                 </div>
                             </div>
-                        </div>        
+                        </div>
                 </div>
 
             )}

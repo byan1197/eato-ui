@@ -5,7 +5,7 @@ import './css/Login.css';
 import axios from 'axios';
 
 class Signup extends Component {
-    
+
     state = {
         username: '',
         password: '',
@@ -52,7 +52,7 @@ class Signup extends Component {
             reputation: -1,
         }
         console.log(login_cred);
-        
+
         axios.post('http://localhost:7000/auth/signup/', login_cred)
         .then(response => {
             console.log(response.status);
@@ -60,6 +60,7 @@ class Signup extends Component {
                 this.setState({
                     loggedIn:true,
                 });
+                console.log(response.data);
                 localStorage.setItem('uid', response.data);
             }
         	console.log(response)
@@ -74,11 +75,11 @@ class Signup extends Component {
 
     render(){
 
-        
+
         if (this.state.loggedIn){
             return(
                 <Redirect to="/" />
-                
+
             );
         }
 
@@ -92,7 +93,7 @@ class Signup extends Component {
                         <input onChange={this.handleName} ref="name" type="name" className="mb-2 form-control" id="email" placeholder="Name"required></input>
                         <input onChange={this.handlePassword} ref="password" type="password" className="mb-2 form-control" id="pasword" placeholder="Password"required></input>
                         <input onChange={this.handleConfirmPassword} ref="password_confirm" type="password" className="mb-2 form-control" id="pasword_confirm" placeholder="Confirm Password"required></input>
-                        
+
                         <div  className="input-group mb-3">
                             <select onChange={this.handleType} className="custom-select" id="inputGroupSelect02">
                                 <option value="" selected></option>
@@ -101,14 +102,14 @@ class Signup extends Component {
                                 <option value="Online">Online</option>
                                 <option value="Food Critic">Food Critic</option>
                             </select>
-                            
+
                         </div>
-                        
+
                         <div className="row">
                             <div className="col-md-12 col-sm-16 pr-1 pl-3">
                                 <button type="submit" className="btn w-100 my-2 btn-warning">Signup</button>
                             </div>
-                        
+
                         </div>
                     </form>
                 </div>

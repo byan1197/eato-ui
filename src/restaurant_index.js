@@ -24,7 +24,7 @@ class RestaurantIndex extends Component{
 
         this.databaseQuery('restau','id',this.state.id);
         this.databaseQuery('location','restauId',this.state.id);
-       
+
 
 
     }
@@ -37,7 +37,7 @@ class RestaurantIndex extends Component{
             margin:"5% 20% 5% 20%",
            //   backgroundColor: "rgba(255,255,255,0)",
            //  border: "none",
-             
+
         }
         if(this.state.restaurant == null || this.state.locations == null){
             return(<p>Loading</p>);
@@ -45,12 +45,12 @@ class RestaurantIndex extends Component{
         console.log(this.state.checkedB);
 
         return (
-            
+
             <div style={margin}>
                 <RestaurantDetail restaurant={this.state.restaurant} locations = {this.state.locations}/>
 
                 <Switch
-          
+
                 onChange={this.handleChange('checkedB')}
                 value="checkedA"
                 color="Secondary"
@@ -62,13 +62,13 @@ class RestaurantIndex extends Component{
 
 
     databaseQuery(type,param,term){
-        
+
         var search = `http://localhost:7000/${type}/?${param}=${term}`;
         console.log("this is da search " + search);
-        
+
         axios.get(search)
             .then((response) => {
-                
+
                 if(type == 'restau'){
                     this.setState({
                         restaurant: response.data[0]
@@ -81,7 +81,7 @@ class RestaurantIndex extends Component{
                         });
                     console.log(response.data);
                 }
-                
+
 
             })
             .catch( (error) => {

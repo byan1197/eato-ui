@@ -12,15 +12,14 @@ class App extends Component{
         this.state={
             searchTerm: null,
             list: [],
-            allItems: []
-        };        
+        };
     }
 
     render(){
 
         return (
             <div>
-                <SearchBar allItems={this.state.allItems} onSearchTermChange={searchTerm => this.databaseQuery(searchTerm)}/>
+                <SearchBar onSearchTermChange={searchTerm => this.databaseQuery(searchTerm)}/>
                 <RestaurantResult rest={this.state.list} />
             </div>
         );
@@ -36,12 +35,8 @@ class App extends Component{
         console.log(search.length);
         axios.get(search)
             .then((response) => {
-                console.log("response", response);
-                if(term == ''){
-                    this.setState({ allItems: response.data.map((rest,index)=> rest.name)})
-                }
                 this.setState({
-                list: response.data
+                    list: response.data
                 });
 
             })

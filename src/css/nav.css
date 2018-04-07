@@ -14,3 +14,10 @@
 .restau-card {
     border: none;
 }
+
+.nav-bar-btn {
+    display: inline-block;
+}
+.nav-btn-group{
+    display: inline-flex;
+}
