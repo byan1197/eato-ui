@@ -7,6 +7,7 @@ import registerServiceWorker from './registerServiceWorker';
 import Login from './Login'
 import Signup from './Signup'
 import App from './app';
+import Homepage from './Homepage';
 
 import Ratings from './Ratings';
 
@@ -15,8 +16,8 @@ ReactDOM.render(
     <BrowserRouter>
       <div>
         <Switch>
-          
-          <Route path="/test" component={Ratings}/>
+
+          <Route path="/test" component={Homepage}/>
           <Route path="/restaurant-index/:id" component={RestaurantIndex}/>
           <Route path="/login" component={Login}/>
           <Route path="/signup" component={Signup}/>
