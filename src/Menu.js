@@ -20,6 +20,9 @@ class Menu extends Component{
             mainMenu: null,
             starterMenu: null,
             dessertMenu: null,
+            itemRatingComment: '',
+            itemRatingValue: 0,
+
         }
     }
 
@@ -70,6 +73,51 @@ class Menu extends Component{
         console.log(this.state.beverageMenu);
     }
 
+    submitItemRating(id){
+        /*
+            private Integer userId;
+            private Date date;
+            private Integer itemId;
+            private int rating;
+            private String comment;
+        */
+        const itemRating = {
+            userId:localStorage.getItem('uid'),
+            date: null,
+            itemId:id,
+            rating:this.state.itemRatingValue,
+            comment:this.state.itemRatingComment,
+        }
+        console.log(itemRating);
+        axios.post(`http://localhost:7000/rateitem/`,itemRating);
+    }
+
+    onItemCommentChange = event =>{
+        this.setState({
+            itemRatingComment:event.target.value,
+        })
+    }
+
+    itemStarClick(nextValue, prevValue, name) {
+      this.setState({
+          itemRatingValue:nextValue,
+      });
+    }
+
+    useME_LATER(){
+        return (<div>
+            <td><textarea onChange={()=>this.onItemCommentChange()} className="form-control w-100, h-100"></textarea></td>
+            <td>
+                <StarRatingComponent
+                    name=''/* name of the radio input, it is required */
+                    value={4} /* number of selected icon (`0` - none, `1` - first) */
+                    // onStarClick={this.itemStarClick.bind(this)}
+                />
+            </td>
+            </div>)
+
+    }
+
     render(){
         const beverageData = this.state.beverageMenu;
         const starterData = this.state.starterMenu;
@@ -92,9 +140,7 @@ class Menu extends Component{
                                         <th>Price</th>
                                         <th>Description</th>
                                         <th>View Ratings</th>
-                                        <th>Comments</th>
-                                        <th>Rate</th>
-                                        <th>Submit</th>
+                                        <th>Submit Your Own Rating</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -104,21 +150,14 @@ class Menu extends Component{
                                             <td>{row.price}</td>
                                             <td>{row.description}</td>
                                             <td><button className="btn btn-outline-primary">View</button></td>
-                                            <td><textarea className="form-control w-100, h-100"></textarea></td>
-                                            <td>
-                                                <StarRatingComponent
-                                                    name="foodRating"/* name of the radio input, it is required */
-                                                    value={0} /* number of selected icon (`0` - none, `1` - first) */
-                                                    // onStarClick={this.onFoodStarClick.bind(this)}
-                                                />
-                                            </td>
-                                            <td><button className="btn btn-outline-success">Submit</button></td>
+                                            <td><button className="btn btn-outline-success">Rate It!</button></td>
                                         </tr>
                                     )}
                                 </tbody>
                             </div>
                         </div>
                     </div>
+
                     <div className="row">
                         <div className="p-5 card">
                             <h1>Starters</h1>
@@ -129,9 +168,7 @@ class Menu extends Component{
                                         <th>Price</th>
                                         <th>Description</th>
                                         <th>View Ratings</th>
-                                        <th>Comments</th>
-                                        <th>Rate</th>
-                                        <th>Submit</th>
+                                        <th>Submit Your Own Rating</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -141,24 +178,17 @@ class Menu extends Component{
                                             <td>{row.price}</td>
                                             <td>{row.description}</td>
                                             <td><button className="btn btn-outline-primary">View</button></td>
-                                            <td><textarea className="form-control w-100, h-100"></textarea></td>
-                                            <td>
-                                                <StarRatingComponent
-                                                    name="foodRating"/* name of the radio input, it is required */
-                                                    value={0} /* number of selected icon (`0` - none, `1` - first) */
-                                                    // onStarClick={this.onFoodStarClick.bind(this)}
-                                                />
-                                            </td>
-                                            <td><button className="btn btn-outline-success">Submit</button></td>
+                                            <td><button className="btn btn-outline-success">Rate It!</button></td>
                                         </tr>
                                     )}
                                 </tbody>
                             </div>
                         </div>
                     </div>
+
                     <div className="row">
                         <div className="p-5 card">
-                            <h1>Starters</h1>
+                            <h1>Beverages</h1>
                             <div className="table table-hover">
                                 <thead>
                                     <tr>
@@ -166,9 +196,7 @@ class Menu extends Component{
                                         <th>Price</th>
                                         <th>Description</th>
                                         <th>View Ratings</th>
-                                        <th>Comments</th>
-                                        <th>Rate</th>
-                                        <th>Submit</th>
+                                        <th>Submit Your Own Rating</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -178,24 +206,17 @@ class Menu extends Component{
                                             <td>{row.price}</td>
                                             <td>{row.description}</td>
                                             <td><button className="btn btn-outline-primary">View</button></td>
-                                            <td><textarea className="form-control w-100, h-100"></textarea></td>
-                                            <td>
-                                                <StarRatingComponent
-                                                    name="foodRating"/* name of the radio input, it is required */
-                                                    value={0} /* number of selected icon (`0` - none, `1` - first) */
-                                                    // onStarClick={this.onFoodStarClick.bind(this)}
-                                                />
-                                            </td>
-                                            <td><button className="btn btn-outline-success">Submit</button></td>
+                                            <td><button className="btn btn-outline-success">Rate It!</button></td>
                                         </tr>
                                     )}
                                 </tbody>
                             </div>
                         </div>
                     </div>
+
                     <div className="row">
                         <div className="p-5 card">
-                            <h1>Starters</h1>
+                            <h1>Desserts</h1>
                             <div className="table table-hover">
                                 <thead>
                                     <tr>
@@ -203,33 +224,25 @@ class Menu extends Component{
                                         <th>Price</th>
                                         <th>Description</th>
                                         <th>View Ratings</th>
-                                        <th>Comments</th>
-                                        <th>Rate</th>
-                                        <th>Submit</th>
+                                        <th>Submit Your Own Rating</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {dessertData.map((row, index)=>
                                         <tr key={index}>
                                             <td>{row.name}</td>
-                                            <td>${row.price}</td>
+                                            <td>{row.price}</td>
                                             <td>{row.description}</td>
                                             <td><button className="btn btn-outline-primary">View</button></td>
-                                            <td><textarea className="form-control w-100, h-100"></textarea></td>
-                                            <td>
-                                                <StarRatingComponent
-                                                    name="foodRating"/* name of the radio input, it is required */
-                                                    value={0} /* number of selected icon (`0` - none, `1` - first) */
-                                                    // onStarClick={this.onFoodStarClick.bind(this)}
-                                                />
-                                            </td>
-                                            <td><button className="btn btn-outline-success">Submit</button></td>
+                                            <td><button className="btn btn-outline-success">Rate It!</button></td>
                                         </tr>
                                     )}
                                 </tbody>
                             </div>
                         </div>
                     </div>
+
+
                 </div>
             );
         }
