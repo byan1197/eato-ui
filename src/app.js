@@ -63,9 +63,6 @@ class App extends Component{
           style={customStyles}
           contentLabel="Example Modal"
         >
-
-
-          {/* <button onClick={this.closeModal}>close</button> */}
           <div>{this.state.modalData == null ? <p>HOL UP</p> :JSONToTable(this.state.modalData)} </div>
 
         </Modal>
