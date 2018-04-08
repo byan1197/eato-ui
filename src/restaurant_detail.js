@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import FontAwesome from 'react-fontawesome';
 import Stars from './stars';
-
-
-
-
-
+import StarRatingComponent from 'react-star-rating-component';
 
 class RestaurantDetail extends Component{
     constructor(props){
@@ -15,13 +11,13 @@ class RestaurantDetail extends Component{
         this.state={
             restaurant: null,
         }
-        
-        
+
+
     }
-    
+
     render(){
-        
-        
+
+
         const height= {
             height:"200px",
             width:"200px",
@@ -35,11 +31,11 @@ class RestaurantDetail extends Component{
             //  margin:"5% 20% 5% 20%",
             //   backgroundColor: "rgba(255,255,255,0)",
             //  border: "none",
-              
+
          }
 
-         
-        
+
+
          if(this.props.restaurant == null){
              return(<p>Loading</p>);
          }
@@ -52,10 +48,34 @@ class RestaurantDetail extends Component{
                     </div>
                     <div className="col-md-3 ">
                         <h1>{this.props.restaurant.name}</h1>
-                        <h5>food rating: {Stars(this.props.restaurant.foodRating)}</h5>
-                        <h5>price rating: {Stars(this.props.restaurant.priceRating)}</h5>
-                        <h5>mood rating: {Stars(this.props.restaurant.moodRating)}</h5>
-                        <h5>staff rating: {Stars(this.props.restaurant.staffRating)}</h5>
+                        <p><b>Food rating:</b><br></br>
+                            <StarRatingComponent
+                                name="foodRating"/* name of the radio input, it is required */
+                                value={this.props.restaurant.foodRating} /* number of selected icon (`0` - none, `1` - first) */
+                                editable={false}
+                            />
+                        </p>
+                        <p><b>Price rating:</b><br></br>
+                            <StarRatingComponent
+                                name="priceRating"/* name of the radio input, it is required */
+                                value={this.props.restaurant.priceRating} /* number of selected icon (`0` - none, `1` - first) */
+                                editable={false}
+                            />
+                        </p>
+                        <p><b>Mood rating:</b><br></br>
+                            <StarRatingComponent
+                                name="moodRating"/* name of the radio input, it is required */
+                                value={this.props.restaurant.moodRating} /* number of selected icon (`0` - none, `1` - first) */
+                                editable={false}
+                            />
+                        </p>
+                        <p><b>Staff rating:</b><br></br>
+                            <StarRatingComponent
+                                name="staffRating"/* name of the radio input, it is required */
+                                value={this.props.restaurant.staffRating} /* number of selected icon (`0` - none, `1` - first) */
+                                editable={false}
+                            />
+                        </p>
                     </div>
                     <div className="col-md-6">
                         <h1>Locations</h1>
@@ -70,27 +90,27 @@ class RestaurantDetail extends Component{
                             </thead>
                             <tbody>
                             {this.props.locations.map((location,index) =>
-                                
+
                                 <tr>
-                    
+
                                 <th scope="row">{location.streetAddress}</th>
                                 <td>{location.managerName}</td>
                                 <td>{location.phoneNumber}</td>
                                 <td>{location.firstOpenDate}</td>
-                                
-                                
 
-                               
+
+
+
                                 </tr>
-                               
+
                             )}
                             </tbody>
                             </table>
                     </div>
                 </div>
-                
+
             </div>
-           
+
         );
     }
 
