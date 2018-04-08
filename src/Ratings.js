@@ -138,7 +138,7 @@ class Ratings extends Component {
                     <p><b>Submit your own review:</b></p>
                     <div className="row mb-2">
                         <div className="col-md-5">
-                            <textarea onChange={this.handleComment} className="h-100 form-control w-100"></textarea>
+                            <textarea defaultValue={this.state.comments} onChange={this.handleComment} className="h-100 form-control w-100"></textarea>
                         </div>
                         <div className="col-md-5">
                             <p><b>Rate the service:</b></p>
@@ -175,7 +175,7 @@ class Ratings extends Component {
 
                         </div>
                         <div className="col-md-1">
-                            <button type="submit" onClick={()=>{this.submitRating()}} className="my-auto btn btn-outline-success">Submit</button>
+                            <button type="submit" onClick={()=> this.submitRating()} className="my-auto btn btn-outline-success">Submit</button>
                         </div>
                     </div>
                 </div>

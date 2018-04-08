@@ -143,10 +143,13 @@ class Homepage extends Component {
             backgroundColor: "rgba(0,0,0,0.5)",
             minHeight:"100%",
         }
+        const noColorBG={
+            backgroundColor: "rgba(0,0,0,0)",
+        }
 
         return(
             <div>
-                <div className="jumbotron">
+                <div className="jumbotron" style={noColorBG}>
                     <Slider {...sliderSettings}>
                         <div className="mainbg">
                             <div className="card h-100 text-white" style={cardnobg}>
@@ -228,21 +231,21 @@ class Homepage extends Component {
                             <div className="card px-2 ">
                                 <h4 className="text-secondary">Highest Raters</h4>
                                 <p>(Based off of Food AND Mood)</p>
-                                {JSONToTable(this.state.hfam)}
+                                <JSONToTable json={this.state.hfam}/>
                             </div>
                         </div>
                         <div className="col-md-4">
                             <div className="px-2 card">
                                 <h4 className="text-secondary">Highest Raters</h4>
                                 <p>(Based off of Food OR Mood)</p>
-                                {JSONToTable(this.state.hfom)}
+                                <JSONToTable json={this.state.hfom} />
                             </div>
                         </div>
                         <div className="col-md-4">
                             <div className="px-2 card">
                                 <h4 className="text-secondary">Highest Food Ratings</h4>
                                 <p>Based on type of restaurant</p>
-                                {JSONToTable(this.state.polarizingRank)}
+                                <JSONToTable json={this.state.polarizingRank} />
                             </div>
                         </div>
                     </div>
