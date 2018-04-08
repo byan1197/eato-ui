@@ -34,7 +34,7 @@ class App extends Component{
             modalData: [],
         };
 
-        this.openModal = this.openModal.bind(this);
+    this.openModal = this.openModal.bind(this);
 
     this.closeModal = this.closeModal.bind(this);
     }
@@ -44,9 +44,9 @@ class App extends Component{
 
 
 
-      closeModal() {
+    closeModal() {
         this.setState({modalIsOpen: false});
-      }
+    }
 
     render(){
 

@@ -7,7 +7,21 @@ import registerServiceWorker from './registerServiceWorker';
 import Ratings from './Ratings';
 import Switches from './switch';
 import Switch from 'material-ui/Switch';
+import Modal from 'react-modal';
+import JSONToTable from './JSONToTable';
+
 import StarRatingComponent from 'react-star-rating-component';
+
+const customStyles = {
+    content : {
+      top                   : '50%',
+      left                  : '50%',
+      right                 : 'auto',
+      bottom                : 'auto',
+      marginRight           : '-50%',
+      transform             : 'translate(-50%, -50%)'
+    }
+  };
 
 
 class Menu extends Component{
@@ -20,8 +34,32 @@ class Menu extends Component{
             mainMenu: null,
             starterMenu: null,
             dessertMenu: null,
+            modalIsOpen: false,
+            list: null,
         }
+        this.openModal = this.openModal.bind(this);
+
+        this.closeModal = this.closeModal.bind(this);
     }
+
+    openModal(id) {
+        axios.get(`http://localhost:7000/menuitemid/?id=${id}`)
+            .then((response) => {
+                this.setState({
+                    list: response.data
+                });
+
+            })
+        this.setState({modalIsOpen: true});
+        console.log("OPEN");
+      }
+
+
+
+    closeModal() {
+        this.setState({modalIsOpen: false});
+    }
+
 
     componentDidMount(){
         axios.get(`http://localhost:7000/getmenu/?restId=${this.props.id}`)
@@ -71,6 +109,10 @@ class Menu extends Component{
     }
 
     render(){
+
+
+
+
         const beverageData = this.state.beverageMenu;
         const starterData = this.state.starterMenu;
         const mainData = this.state.mainMenu;
@@ -81,6 +123,20 @@ class Menu extends Component{
         if (this.state.menu == null) return <p>Loading</p>
         else{
             return(
+                
+
+                <div>
+
+                <Modal
+                    isOpen={this.state.modalIsOpen}
+
+                    onRequestClose={this.closeModal}
+                    style={customStyles}
+                    contentLabel="Example Modal"
+                    >
+                    <div>{this.state.list == null ? <p>HOL UP</p> :JSONToTable(this.state.list)} </div>
+
+                </Modal>
                 <div className="container">
                     <div className="row">
                         <div className="p-5 card">
@@ -103,7 +159,7 @@ class Menu extends Component{
                                             <td>{row.name}</td>
                                             <td>{row.price}</td>
                                             <td>{row.description}</td>
-                                            <td><button className="btn btn-outline-primary">View</button></td>
+                                            <td><button onClick={() => this.openModal(row.itemId)} className="btn btn-outline-primary">View</button></td>
                                             <td><textarea className="form-control w-100, h-100"></textarea></td>
                                             <td>
                                                 <StarRatingComponent
@@ -140,7 +196,7 @@ class Menu extends Component{
                                             <td>{row.name}</td>
                                             <td>{row.price}</td>
                                             <td>{row.description}</td>
-                                            <td><button className="btn btn-outline-primary">View</button></td>
+                                            <td><button onClick={() => this.openModal(row.itemId)} className="btn btn-outline-primary">View</button></td>
                                             <td><textarea className="form-control w-100, h-100"></textarea></td>
                                             <td>
                                                 <StarRatingComponent
@@ -177,7 +233,7 @@ class Menu extends Component{
                                             <td>{row.name}</td>
                                             <td>{row.price}</td>
                                             <td>{row.description}</td>
-                                            <td><button className="btn btn-outline-primary">View</button></td>
+                                            <td><button onClick={() => this.openModal(row.itemId)} className="btn btn-outline-primary">View</button></td>
                                             <td><textarea className="form-control w-100, h-100"></textarea></td>
                                             <td>
                                                 <StarRatingComponent
@@ -214,7 +270,7 @@ class Menu extends Component{
                                             <td>{row.name}</td>
                                             <td>${row.price}</td>
                                             <td>{row.description}</td>
-                                            <td><button className="btn btn-outline-primary">View</button></td>
+                                            <td><button onClick={() => this.openModal(row.itemId)} className="btn btn-outline-primary">View</button></td>
                                             <td><textarea className="form-control w-100, h-100"></textarea></td>
                                             <td>
                                                 <StarRatingComponent
@@ -231,6 +287,7 @@ class Menu extends Component{
                         </div>
                     </div>
                 </div>
+            </div>
             );
         }
 
