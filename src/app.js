@@ -6,6 +6,7 @@ import RestaurantResult from './restaurant_result';
 import registerServiceWorker from './registerServiceWorker';
 import Modal from 'react-modal';
 import JSONToTable from './JSONToTable';
+import Homepage from './Homepage';
 // import './css/modal.css';
 
 const customStyles = {
@@ -26,7 +27,7 @@ class App extends Component{
         this.state={
             searchTerm: null,
             list: [],
-            current: 'search', //it will either be 'search' or 'modal'
+            current: '', //it will either be 'search' or 'modal'
             modalIsOpen: false,
             type: '',
             input: '',
@@ -53,7 +54,7 @@ class App extends Component{
         return (
             <div>
                 <SearchBar micsQuery={(type,input) => this.databaseMiscQuery(type,input)} open={() => this.openModal()} current={() => this.toggleSearch() } onSearchTermChange={searchTerm => this.databaseQuery(searchTerm)}/>
-                {this.state.current=='search' ? <RestaurantResult rest={this.state.list} /> : null}
+                {this.state.current=='search' ? <RestaurantResult rest={this.state.list} /> : <Homepage />}
             <div>
         <button onClick={this.openModal}>Open Modal</button>
         <Modal
