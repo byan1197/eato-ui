@@ -1,0 +1,20 @@
+.mainbg{
+    background-image: url('https://p5.focus.de/img/fotos/crop4849782/5983493296-cfreecrop_21_9-w1280-h720-o-q75-p5/traxxx-vegan-essen-colourbox7542693.jpg');
+}
+
+.dessertbg{
+    background-image:url('http://s1.dmcdn.net/J2niF/1280x720-Gw4.jpg');
+}
+
+.starterbg{
+    background-image: url('http://www.cbc.ca/food/content/images/recipes/ChiffonadeSalad.jpg')
+}
+
+.beveragebg{
+    background-image: url('http://www.sciencemag.org/sites/default/files/styles/article_main_large/public/Drinks.jpg?itok=nQAp5gEC');
+}
+
+.beveragebg, .starterbg, .dessertbg, .mainbg {
+    background-size: cover;
+    background-position: 0% 100%;
+}
