@@ -11,8 +11,9 @@ const JSONToTable = (props) => {
     names.Jan='Not Rated in 2015 January (g)';
     names.lower='Names and Dates of Restaurants with Ratings Lower Than.. (h)';
     names.highest='Type with Highest Food (i)';
+    names.rating='Ratings';
 
-    
+
     console.log(this.props);
     for (var s in props.json[0]){
         tableHeaders.push(s);

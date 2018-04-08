@@ -198,11 +198,11 @@ class Menu extends Component{
                     style={customStyles}
                     contentLabel="Example Modal"
                     >
-                    <div>{this.state.list == null ? this.renderRatingForm():JSONToTable(this.state.list)} </div>
+                    <div>{this.state.list == null ? this.renderRatingForm():<JSONToTable  json={this.state.list} title="rating" />} </div>
 
                 </Modal>
                 <div className="container">
-                    <div className="p-5 card">
+                    <div className="p-5 card mt-4">
                         <h1>Mains</h1>
                         <div className="table table-hover">
                             <thead>

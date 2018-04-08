@@ -35,8 +35,8 @@ class SearchBar extends Component{
         else{
             this.props.current();
         }
-        
-        
+
+
     }
 
     handleInputSelect = event => {
@@ -58,7 +58,7 @@ class SearchBar extends Component{
             return(<select onChange={event => this.handleInputSelect(event)}
             className="input-group-prepend form-control w-75 border-right-0"
             >
-                {this.state.categoryDropdown == null ? <option>Loading</option> : 
+                {this.state.categoryDropdown == null ? <option>Loading</option> :
                 this.state.categoryDropdown.map((category, index)=>
                     <option >{category}</option>
                 )}
@@ -68,7 +68,7 @@ class SearchBar extends Component{
             return(<select onChange={event => this.handleInputSelect(event)}
             className="input-group-prepend form-control w-75 border-right-0"
             >
-                {this.state.lowerDropdown == null ? <option>Loading</option> : 
+                {this.state.lowerDropdown == null ? <option>Loading</option> :
                 this.state.lowerDropdown.map((lower, index)=>
                     <option >{lower}</option>
                 )}
@@ -78,16 +78,16 @@ class SearchBar extends Component{
             return(<select onChange={event => this.handleInputSelect(event)}
             className="input-group-prepend form-control w-75 border-right-0"
             >
-                {this.state.categoryDropdown == null ? <option>Loading</option> : 
+                {this.state.categoryDropdown == null ? <option>Loading</option> :
                 this.state.categoryDropdown.map((category, index)=>
                     <option >{category}</option>
                 )}
             </select>);
         }
         else if (this.state.searchType==='restaurantName'){
-            
-            
-            
+
+
+
             return(<input type="text"
                 className="input-group-prepend form-control w-75 border-right-0"
                 placeholder="Search here"
@@ -95,7 +95,7 @@ class SearchBar extends Component{
                 onChange={event => this.onInputChange(event.target.value)}>
             </input>);
         }
-        
+
     }
 
     buildDropdown(type){
@@ -109,12 +109,12 @@ class SearchBar extends Component{
 
         })
         }
-        
+
         else if(type=='lower'){
             console.log('lower');
             axios.get(`http://localhost:7000/raternames/`)
             .then((response) => {
-                
+
             console.log("IM INSIDE" + response.data);
             this.setState({
                 lowerDropdown: response.data
@@ -122,13 +122,24 @@ class SearchBar extends Component{
 
         })
         }
-        
-        
+
+
     }
 
     logout(){
         localStorage.removeItem('uid');
         this.forceUpdate();
+    }
+
+    delete(){
+        const id = localStorage.getItem('uid');
+        axios.get(`http://localhost:7000/deleteuser/?userid=${id}`)
+        .then((response)=>{
+            if(response.status === 200){
+                localStorage.removeItem('uid')
+                this.forceUpdate();
+            }
+        });
     }
 
     handleSelect = event => {
@@ -141,11 +152,11 @@ class SearchBar extends Component{
 
     handleSearch(){
         if (this.state.searchType == 'restaurantName'){
-            
-      
+
+
         }
 
-       
+
         else {
             console.log("YOYOYO" + this.state.input);
             this.props.micsQuery(this.state.searchType, this.state.input);
@@ -153,10 +164,10 @@ class SearchBar extends Component{
             this.props.open();
         }
     }
-    
+
     render(){
         // if(this.state.renderCards){
-            
+
         //     () => this.setState({})
         // }
         console.log("I AM RENDERING");
@@ -200,7 +211,7 @@ class SearchBar extends Component{
                                 </a>
                             </li>:
                             <li className="nav-btn-group nav-item active">
-                            
+                                <button onClick={()=>{this.delete()}} className="nav-bar-btn btn btn-danger mx-2"><FontAwesome name="trash-alt"/>Delete My Account</button>
                                 <button className="nav-bar-btn btn btn-warning mx-2"><FontAwesome name="user"/>My Profile</button>
                                 <button onClick={()=>{this.logout()}} className="nav-bar-btn btn text-white btn-dark mr-2"> <FontAwesome name="sign-out"/>Logout</button>
                             </li>

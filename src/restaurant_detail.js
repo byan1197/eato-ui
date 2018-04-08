@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import FontAwesome from 'react-fontawesome';
 import Stars from './stars';
 import StarRatingComponent from 'react-star-rating-component';
+import axios from 'axios';
 
 class RestaurantDetail extends Component{
     constructor(props){
@@ -10,10 +11,22 @@ class RestaurantDetail extends Component{
 
         this.state={
             restaurant: null,
+            mostExpensive: null,
         }
-
+        this.getMostExpensive();
 
     }
+
+    getMostExpensive(){
+        const id = this.props.restaurant.restaurantId;
+        axios.get(`http://localhost:7000/highestprice/?id=${id}`)
+        .then((response)=>{
+            this.setState({
+                mostExpensive: response.data[0].price,
+            })
+        })
+    }
+
 
     render(){
 
@@ -78,34 +91,41 @@ class RestaurantDetail extends Component{
                         </p>
                     </div>
                     <div className="col-md-6">
-                        <h1>Locations</h1>
-                        <table className="table" >
-                            <thead>
-                                <tr>
-                                <th scope="col">Address</th>
-                                <th scope="col">Manager Name</th>
-                                <th scope="col">Phone Number</th>
-                                <th scope="col">First Open Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            {this.props.locations.map((location,index) =>
+                        <div className="row">
+                            <h1>Locations</h1>
+                            <table className="table" >
+                                <thead>
+                                    <tr>
+                                    <th scope="col">Address</th>
+                                    <th scope="col">Manager Name</th>
+                                    <th scope="col">Phone Number</th>
+                                    <th scope="col">First Open Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {this.props.locations.map((location,index) =>
 
-                                <tr>
+                                    <tr>
 
-                                <th scope="row">{location.streetAddress}</th>
-                                <td>{location.managerName}</td>
-                                <td>{location.phoneNumber}</td>
-                                <td>{location.firstOpenDate}</td>
-
-
+                                    <th scope="row">{location.streetAddress}</th>
+                                    <td>{location.managerName}</td>
+                                    <td>{location.phoneNumber}</td>
+                                    <td>{location.firstOpenDate}</td>
 
 
-                                </tr>
 
-                            )}
-                            </tbody>
-                            </table>
+
+                                    </tr>
+
+                                )}
+                                </tbody>
+                                </table>
+                        </div>
+
+                        <div className="row">
+                            <h5 className="text-secondary">Most expensive item price: ${this.state.mostExpensive}</h5>
+                        </div>
+
                     </div>
                 </div>
 

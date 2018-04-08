@@ -17,4 +17,13 @@
 .beveragebg, .starterbg, .dessertbg, .mainbg {
     background-size: cover;
     background-position: 0% 100%;
+    min-height: 300px;
+}
+
+body{
+    font-family: 'Fira Sans', sans-serif;
+}
+
+.btn, .form-control {
+    border-radius: 25px;
 }

@@ -3,6 +3,7 @@ body{
     /*filter:blur(5px);*/
     background-color: #ededed;
     background-attachment: fixed;
+    background-size: cover;
 }
 
 .login-card{
