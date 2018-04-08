@@ -144,7 +144,7 @@ class Homepage extends Component {
         }
 
         return(
-            <div className="container">
+            <div>
                 <div className="jumbotron">
                     <Slider {...sliderSettings}>
                         <div className="mainbg">
@@ -221,31 +221,33 @@ class Homepage extends Component {
                     </Slider>
                 </div>
 
-                <div className="row">
-                    <div className="col-md-4">
-                        <div className="card px-2 ">
-                            <h4 className="text-secondary">Highest Raters</h4>
-                            <p>(Based off of Food AND Mood)</p>
-                            {JSONToTable(this.state.hfam)}
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-4">
+                            <div className="card px-2 ">
+                                <h4 className="text-secondary">Highest Raters</h4>
+                                <p>(Based off of Food AND Mood)</p>
+                                {JSONToTable(this.state.hfam)}
+                            </div>
                         </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="px-2 card">
-                            <h4 className="text-secondary">Highest Raters</h4>
-                            <p>(Based off of Food OR Mood)</p>
-                            {JSONToTable(this.state.hfom)}
+                        <div className="col-md-4">
+                            <div className="px-2 card">
+                                <h4 className="text-secondary">Highest Raters</h4>
+                                <p>(Based off of Food OR Mood)</p>
+                                {JSONToTable(this.state.hfom)}
+                            </div>
                         </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="px-2 card">
-                            <h4 className="text-secondary">Highest Food Ratings</h4>
-                            <p>Based on type of restaurant</p>
-                            {JSONToTable(this.state.polarizingRank)}
+                        <div className="col-md-4">
+                            <div className="px-2 card">
+                                <h4 className="text-secondary">Highest Food Ratings</h4>
+                                <p>Based on type of restaurant</p>
+                                {JSONToTable(this.state.polarizingRank)}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         );
     }
 
