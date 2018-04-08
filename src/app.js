@@ -32,6 +32,7 @@ class App extends Component{
             type: '',
             input: '',
             modalData: [],
+        
         };
 
     this.openModal = this.openModal.bind(this);
@@ -63,7 +64,7 @@ class App extends Component{
           style={customStyles}
           contentLabel="Example Modal"
         >
-          <div>{this.state.modalData == null ? <p>HOL UP</p> :JSONToTable(this.state.modalData)} </div>
+          <div>{this.state.modalData == null ? <p>HOL UP</p> : <JSONToTable  json={this.state.modalData} title={this.state.type} />} </div>
 
         </Modal>
       </div>
@@ -114,7 +115,7 @@ class App extends Component{
         else if(type=='raters'){
             search = `http://localhost:7000/totalratingrest/`;
         }
-        else if(type=='2015'){
+        else if(type=='Jan'){
             search = `http://localhost:7000/januaryrest/`;
         }
         else if(type=='lower'){
