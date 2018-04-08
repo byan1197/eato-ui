@@ -78,6 +78,13 @@ class Ratings extends Component {
             console.log(response);
         });
         this.getRatings();
+        this.setState({
+            food: 0,
+            mood: 0,
+            price: 0,
+            staff: 0,
+            comments:'',
+        })
     }
 
     getRatings(){

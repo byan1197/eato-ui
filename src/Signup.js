@@ -61,7 +61,6 @@ class Signup extends Component {
                     loggedIn:true,
                 });
                 console.log(response.data);
-                localStorage.setItem('uid', response.data);
             }
         	console.log(response)
         })

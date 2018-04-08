@@ -19,7 +19,7 @@ const customStyles = {
       transform             : 'translate(-50%, -50%)'
     }
   };
-  
+
 class App extends Component{
     constructor(props){
         super(props);
@@ -35,19 +35,19 @@ class App extends Component{
         };
 
         this.openModal = this.openModal.bind(this);
-  
+
     this.closeModal = this.closeModal.bind(this);
     }
     openModal() {
         this.setState({modalIsOpen: true});
       }
-    
-      
-    
+
+
+
       closeModal() {
         this.setState({modalIsOpen: false});
       }
-    
+
     render(){
 
 
@@ -56,19 +56,15 @@ class App extends Component{
                 <SearchBar micsQuery={(type,input) => this.databaseMiscQuery(type,input)} open={() => this.openModal()} current={() => this.toggleSearch() } onSearchTermChange={searchTerm => this.databaseQuery(searchTerm)}/>
                 {this.state.current=='search' ? <RestaurantResult rest={this.state.list} /> : <Homepage />}
             <div>
-        <button onClick={this.openModal}>Open Modal</button>
         <Modal
           isOpen={this.state.modalIsOpen}
-          
+
           onRequestClose={this.closeModal}
           style={customStyles}
           contentLabel="Example Modal"
         >
-
-          
-          <button onClick={this.closeModal}>close</button>
           <div>{this.state.modalData == null ? <p>HOL UP</p> :JSONToTable(this.state.modalData)} </div>
-          
+
         </Modal>
       </div>
             </div>
@@ -128,7 +124,7 @@ class App extends Component{
         else if(type=='highest'){
             search=`http://localhost:7000/typehighestfood/?type=${input}`
         }
-        
+
         axios.get(search)
         .then((response) => {
             console.log("heyho");
@@ -138,7 +134,7 @@ class App extends Component{
             });
 
         })
-        
+
         // else if(type=='raters'){
         //     axios.get(`http://localhost:7000/totalratingrest/`)
         //     .then((response) => {
@@ -148,7 +144,7 @@ class App extends Component{
 
         //     })
         // }
-        
+
     }
 }
 
