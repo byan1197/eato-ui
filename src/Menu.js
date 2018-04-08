@@ -202,119 +202,109 @@ class Menu extends Component{
 
                 </Modal>
                 <div className="container">
-                    <div className="row">
-                        <div className="p-5 card">
-                            <h1>Mains</h1>
-                            <div className="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Item</th>
-                                        <th>Price</th>
-                                        <th>Description</th>
-                                        <th>View Ratings</th>
-                                        <th>Submit Your Own Rating</th>
+                    <div className="p-5 card">
+                        <h1>Mains</h1>
+                        <div className="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Price</th>
+                                    <th>Description</th>
+                                    <th>View Ratings</th>
+                                    <th>Submit Your Own Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.state.mainMenu.map((row, index)=>
+                                    <tr key={index}>
+                                        <td>{row.name}</td>
+                                        <td>{row.price}</td>
+                                        <td>{row.description}</td>
+                                        <td><button onClick={() => this.openModal(row.itemId, false)} className="btn btn-outline-primary">View</button></td>
+                                        <td><button onClick={() => this.openModal(row.itemId, true)} className="btn btn-outline-success">Rate It!</button></td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    {this.state.mainMenu.map((row, index)=>
-                                        <tr key={index}>
-                                            <td>{row.name}</td>
-                                            <td>{row.price}</td>
-                                            <td>{row.description}</td>
-                                            <td><button onClick={() => this.openModal(row.itemId, false)} className="btn btn-outline-primary">View</button></td>
-                                            <td><button onClick={() => this.openModal(row.itemId, true)} className="btn btn-outline-success">Rate It!</button></td>
-                                        </tr>
-                                    )}
-                                </tbody>
-                            </div>
+                                )}
+                            </tbody>
                         </div>
                     </div>
 
-                    <div className="row">
-                        <div className="p-5 card">
-                            <h1>Starters</h1>
-                            <div className="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Item</th>
-                                        <th>Price</th>
-                                        <th>Description</th>
-                                        <th>View Ratings</th>
-                                        <th>Submit Your Own Rating</th>
+                    <div className="p-5 card">
+                        <h1>Starters</h1>
+                        <div className="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Price</th>
+                                    <th>Description</th>
+                                    <th>View Ratings</th>
+                                    <th>Submit Your Own Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {starterData.map((row, index)=>
+                                    <tr key={index}>
+                                        <td>{row.name}</td>
+                                        <td>{row.price}</td>
+                                        <td>{row.description}</td>
+                                        <td><button onClick={() => this.openModal(row.itemId, false)} className="btn btn-outline-primary">View</button></td>
+                                        <td><button onClick={() => this.openModal(row.itemId, true)} className="btn btn-outline-success">Rate It!</button></td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    {starterData.map((row, index)=>
-                                        <tr key={index}>
-                                            <td>{row.name}</td>
-                                            <td>{row.price}</td>
-                                            <td>{row.description}</td>
-                                            <td><button onClick={() => this.openModal(row.itemId, false)} className="btn btn-outline-primary">View</button></td>
-                                            <td><button onClick={() => this.openModal(row.itemId, true)} className="btn btn-outline-success">Rate It!</button></td>
-                                        </tr>
-                                    )}
-                                </tbody>
-                            </div>
+                                )}
+                            </tbody>
                         </div>
                     </div>
 
-                    <div className="row">
-                        <div className="p-5 card">
-                            <h1>Beverages</h1>
-                            <div className="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Item</th>
-                                        <th>Price</th>
-                                        <th>Description</th>
-                                        <th>View Ratings</th>
-                                        <th>Submit Your Own Rating</th>
+                    <div className="p-5 card">
+                        <h1>Beverages</h1>
+                        <div className="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Price</th>
+                                    <th>Description</th>
+                                    <th>View Ratings</th>
+                                    <th>Submit Your Own Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {beverageData.map((row, index)=>
+                                    <tr key={index}>
+                                        <td>{row.name}</td>
+                                        <td>{row.price}</td>
+                                        <td>{row.description}</td>
+                                        <td><button onClick={() => this.openModal(row.itemId, false)} className="btn btn-outline-primary">View</button></td>
+                                        <td><button onClick={() => this.openModal(row.itemId, true)} className="btn btn-outline-success">Rate It!</button></td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    {beverageData.map((row, index)=>
-                                        <tr key={index}>
-                                            <td>{row.name}</td>
-                                            <td>{row.price}</td>
-                                            <td>{row.description}</td>
-                                            <td><button onClick={() => this.openModal(row.itemId, false)} className="btn btn-outline-primary">View</button></td>
-                                            <td><button onClick={() => this.openModal(row.itemId, true)} className="btn btn-outline-success">Rate It!</button></td>
-                                        </tr>
-                                    )}
-                                </tbody>
-                            </div>
+                                )}
+                            </tbody>
                         </div>
                     </div>
 
-                    <div className="row">
-                        <div className="p-5 card">
-                            <h1>Desserts</h1>
-                            <div className="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Item</th>
-                                        <th>Price</th>
-                                        <th>Description</th>
-                                        <th>View Ratings</th>
-                                        <th>Submit Your Own Rating</th>
+                    <div className="p-5 card">
+                        <h1>Desserts</h1>
+                        <div className="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Price</th>
+                                    <th>Description</th>
+                                    <th>View Ratings</th>
+                                    <th>Submit Your Own Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {dessertData.map((row, index)=>
+                                    <tr key={index}>
+                                        <td>{row.name}</td>
+                                        <td>{row.price}</td>
+                                        <td>{row.description}</td>
+                                        <td><button onClick={() => this.openModal(row.itemId, false)} className="btn btn-outline-primary">View</button></td>
+                                        <td><button onClick={() => this.openModal(row.itemId, true)} className="btn btn-outline-success">Rate It!</button></td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    {dessertData.map((row, index)=>
-                                        <tr key={index}>
-                                            <td>{row.name}</td>
-                                            <td>{row.price}</td>
-                                            <td>{row.description}</td>
-                                            <td><button onClick={() => this.openModal(row.itemId, false)} className="btn btn-outline-primary">View</button></td>
-                                            <td><button onClick={() => this.openModal(row.itemId, true)} className="btn btn-outline-success">Rate It!</button></td>
-                                        </tr>
-                                    )}
-                                </tbody>
-                            </div>
+                                )}
+                            </tbody>
                         </div>
                     </div>
-
-
                 </div>
             </div>
             );
