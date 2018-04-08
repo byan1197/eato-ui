@@ -66,7 +66,7 @@ class App extends Component{
         >
 
           
-          {/* <button onClick={this.closeModal}>close</button> */}
+          <button onClick={this.closeModal}>close</button>
           <div>{this.state.modalData == null ? <p>HOL UP</p> :JSONToTable(this.state.modalData)} </div>
           
         </Modal>
