@@ -8,6 +8,10 @@ const JSONToTable = (jsonData) => {
         tableHeaders.push(s);
     }
 
+    if(jsonData.length == 0){
+        return(<h1 className="text-secondary">No results found.</h1>)
+    }
+
     return(
         <div className="table table-hover">
             <thead>
