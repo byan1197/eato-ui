@@ -34,6 +34,9 @@ class Menu extends Component{
             mainMenu: null,
             starterMenu: null,
             dessertMenu: null,
+            itemRatingComment: '',
+            itemRatingValue: 0,
+            itemRatingId:-10,
             modalIsOpen: false,
             list: null,
         }
@@ -42,14 +45,22 @@ class Menu extends Component{
         this.closeModal = this.closeModal.bind(this);
     }
 
-    openModal(id) {
-        axios.get(`http://localhost:7000/menuitemid/?id=${id}`)
-            .then((response) => {
-                this.setState({
-                    list: response.data
-                });
+    openModal(id, forPost) {
+        if (!forPost) {
+            axios.get(`http://localhost:7000/menuitemid/?id=${id}`)
+                .then((response) => {
+                    this.setState({
+                        list: response.data
+                    });
 
-            })
+                })
+        } else {
+            this.setState({
+                list: null,
+                itemRatingId:id,
+            });
+
+        }
         this.setState({modalIsOpen: true});
         console.log("OPEN");
       }
@@ -108,10 +119,63 @@ class Menu extends Component{
         console.log(this.state.beverageMenu);
     }
 
+    submitItemRating(id){
+        /*
+            private Integer userId;
+            private Date date;
+            private Integer itemId;
+            private int rating;
+            private String comment;
+        */
+        const itemRating = {
+            userId:localStorage.getItem('uid'),
+            date: null,
+            itemId:this.state.itemRatingId,
+            rating:this.state.itemRatingValue,
+            comment:this.state.itemRatingComment,
+        }
+        axios.post(`http://localhost:7000/rateitem/`,itemRating);
+        this.setState({
+            itemRatingComment: '',
+            itemRatingValue: 0,
+            itemRatingId:-10,
+            modalIsOpen: false,
+        })
+    }
+
+    renderRatingForm(){
+        if (!localStorage.getItem('uid')){
+            return(<h1 className="text-secondary">Please Login to rate</h1>);
+        }
+        return(
+            <div>
+                <h1 className="text-secondary">Rating</h1>
+                <p>Rate the item:</p>
+                <StarRatingComponent
+                    name=''/* name of the radio input, it is required */
+                    value={this.state.itemRatingValue} /* number of selected icon (`0` - none, `1` - first) */
+                    onStarClick={this.itemStarClick.bind(this)}
+                />
+                <p>Comments:</p>
+                <textarea onChange={this.onItemCommentChange} className="form-control w-100, h-100"></textarea>
+                <button onClick={()=>this.submitItemRating(this.itemRatingId)} className="btn btn-outline-success my-2 w-100">Submit</button>
+            </div>
+        );
+    }
+
+    onItemCommentChange = event =>{
+        this.setState({
+            itemRatingComment:event.target.value,
+        })
+    }
+
+    itemStarClick(nextValue, prevValue, name) {
+      this.setState({
+          itemRatingValue:nextValue,
+      });
+  }
+
     render(){
-
-
-
 
         const beverageData = this.state.beverageMenu;
         const starterData = this.state.starterMenu;
@@ -123,7 +187,7 @@ class Menu extends Component{
         if (this.state.menu == null) return <p>Loading</p>
         else{
             return(
-                
+
 
                 <div>
 
@@ -134,156 +198,111 @@ class Menu extends Component{
                     style={customStyles}
                     contentLabel="Example Modal"
                     >
-                    <div>{this.state.list == null ? <p>HOL UP</p> :JSONToTable(this.state.list)} </div>
+                    <div>{this.state.list == null ? this.renderRatingForm():JSONToTable(this.state.list)} </div>
 
                 </Modal>
                 <div className="container">
-                    <div className="row">
-                        <div className="p-5 card">
-                            <h1>Mains</h1>
-                            <div className="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Item</th>
-                                        <th>Price</th>
-                                        <th>Description</th>
-                                        <th>View Ratings</th>
-                                        <th>Comments</th>
-                                        <th>Rate</th>
-                                        <th>Submit</th>
+                    <div className="p-5 card">
+                        <h1>Mains</h1>
+                        <div className="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Price</th>
+                                    <th>Description</th>
+                                    <th>View Ratings</th>
+                                    <th>Submit Your Own Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.state.mainMenu.map((row, index)=>
+                                    <tr key={index}>
+                                        <td>{row.name}</td>
+                                        <td>{row.price}</td>
+                                        <td>{row.description}</td>
+                                        <td><button onClick={() => this.openModal(row.itemId, false)} className="btn btn-outline-primary">View</button></td>
+                                        <td><button onClick={() => this.openModal(row.itemId, true)} className="btn btn-outline-success">Rate It!</button></td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    {this.state.mainMenu.map((row, index)=>
-                                        <tr key={index}>
-                                            <td>{row.name}</td>
-                                            <td>{row.price}</td>
-                                            <td>{row.description}</td>
-                                            <td><button onClick={() => this.openModal(row.itemId)} className="btn btn-outline-primary">View</button></td>
-                                            <td><textarea className="form-control w-100, h-100"></textarea></td>
-                                            <td>
-                                                <StarRatingComponent
-                                                    name="foodRating"/* name of the radio input, it is required */
-                                                    value={0} /* number of selected icon (`0` - none, `1` - first) */
-                                                    // onStarClick={this.onFoodStarClick.bind(this)}
-                                                />
-                                            </td>
-                                            <td><button className="btn btn-outline-success">Submit</button></td>
-                                        </tr>
-                                    )}
-                                </tbody>
-                            </div>
+                                )}
+                            </tbody>
                         </div>
                     </div>
-                    <div className="row">
-                        <div className="p-5 card">
-                            <h1>Starters</h1>
-                            <div className="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Item</th>
-                                        <th>Price</th>
-                                        <th>Description</th>
-                                        <th>View Ratings</th>
-                                        <th>Comments</th>
-                                        <th>Rate</th>
-                                        <th>Submit</th>
+
+                    <div className="p-5 card">
+                        <h1>Starters</h1>
+                        <div className="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Price</th>
+                                    <th>Description</th>
+                                    <th>View Ratings</th>
+                                    <th>Submit Your Own Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {starterData.map((row, index)=>
+                                    <tr key={index}>
+                                        <td>{row.name}</td>
+                                        <td>{row.price}</td>
+                                        <td>{row.description}</td>
+                                        <td><button onClick={() => this.openModal(row.itemId, false)} className="btn btn-outline-primary">View</button></td>
+                                        <td><button onClick={() => this.openModal(row.itemId, true)} className="btn btn-outline-success">Rate It!</button></td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    {starterData.map((row, index)=>
-                                        <tr key={index}>
-                                            <td>{row.name}</td>
-                                            <td>{row.price}</td>
-                                            <td>{row.description}</td>
-                                            <td><button onClick={() => this.openModal(row.itemId)} className="btn btn-outline-primary">View</button></td>
-                                            <td><textarea className="form-control w-100, h-100"></textarea></td>
-                                            <td>
-                                                <StarRatingComponent
-                                                    name="foodRating"/* name of the radio input, it is required */
-                                                    value={0} /* number of selected icon (`0` - none, `1` - first) */
-                                                    // onStarClick={this.onFoodStarClick.bind(this)}
-                                                />
-                                            </td>
-                                            <td><button className="btn btn-outline-success">Submit</button></td>
-                                        </tr>
-                                    )}
-                                </tbody>
-                            </div>
+                                )}
+                            </tbody>
                         </div>
                     </div>
-                    <div className="row">
-                        <div className="p-5 card">
-                            <h1>Starters</h1>
-                            <div className="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Item</th>
-                                        <th>Price</th>
-                                        <th>Description</th>
-                                        <th>View Ratings</th>
-                                        <th>Comments</th>
-                                        <th>Rate</th>
-                                        <th>Submit</th>
+
+                    <div className="p-5 card">
+                        <h1>Beverages</h1>
+                        <div className="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Price</th>
+                                    <th>Description</th>
+                                    <th>View Ratings</th>
+                                    <th>Submit Your Own Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {beverageData.map((row, index)=>
+                                    <tr key={index}>
+                                        <td>{row.name}</td>
+                                        <td>{row.price}</td>
+                                        <td>{row.description}</td>
+                                        <td><button onClick={() => this.openModal(row.itemId, false)} className="btn btn-outline-primary">View</button></td>
+                                        <td><button onClick={() => this.openModal(row.itemId, true)} className="btn btn-outline-success">Rate It!</button></td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    {beverageData.map((row, index)=>
-                                        <tr key={index}>
-                                            <td>{row.name}</td>
-                                            <td>{row.price}</td>
-                                            <td>{row.description}</td>
-                                            <td><button onClick={() => this.openModal(row.itemId)} className="btn btn-outline-primary">View</button></td>
-                                            <td><textarea className="form-control w-100, h-100"></textarea></td>
-                                            <td>
-                                                <StarRatingComponent
-                                                    name="foodRating"/* name of the radio input, it is required */
-                                                    value={0} /* number of selected icon (`0` - none, `1` - first) */
-                                                    // onStarClick={this.onFoodStarClick.bind(this)}
-                                                />
-                                            </td>
-                                            <td><button className="btn btn-outline-success">Submit</button></td>
-                                        </tr>
-                                    )}
-                                </tbody>
-                            </div>
+                                )}
+                            </tbody>
                         </div>
                     </div>
-                    <div className="row">
-                        <div className="p-5 card">
-                            <h1>Starters</h1>
-                            <div className="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Item</th>
-                                        <th>Price</th>
-                                        <th>Description</th>
-                                        <th>View Ratings</th>
-                                        <th>Comments</th>
-                                        <th>Rate</th>
-                                        <th>Submit</th>
+
+                    <div className="p-5 card">
+                        <h1>Desserts</h1>
+                        <div className="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Price</th>
+                                    <th>Description</th>
+                                    <th>View Ratings</th>
+                                    <th>Submit Your Own Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {dessertData.map((row, index)=>
+                                    <tr key={index}>
+                                        <td>{row.name}</td>
+                                        <td>{row.price}</td>
+                                        <td>{row.description}</td>
+                                        <td><button onClick={() => this.openModal(row.itemId, false)} className="btn btn-outline-primary">View</button></td>
+                                        <td><button onClick={() => this.openModal(row.itemId, true)} className="btn btn-outline-success">Rate It!</button></td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    {dessertData.map((row, index)=>
-                                        <tr key={index}>
-                                            <td>{row.name}</td>
-                                            <td>${row.price}</td>
-                                            <td>{row.description}</td>
-                                            <td><button onClick={() => this.openModal(row.itemId)} className="btn btn-outline-primary">View</button></td>
-                                            <td><textarea className="form-control w-100, h-100"></textarea></td>
-                                            <td>
-                                                <StarRatingComponent
-                                                    name="foodRating"/* name of the radio input, it is required */
-                                                    value={0} /* number of selected icon (`0` - none, `1` - first) */
-                                                    // onStarClick={this.onFoodStarClick.bind(this)}
-                                                />
-                                            </td>
-                                            <td><button className="btn btn-outline-success">Submit</button></td>
-                                        </tr>
-                                    )}
-                                </tbody>
-                            </div>
+                                )}
+                            </tbody>
                         </div>
                     </div>
                 </div>

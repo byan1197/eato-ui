@@ -45,7 +45,7 @@ class RestaurantIndex extends Component{
         if(this.state.restaurant == null || this.state.locations == null){
             return(<p>Loading</p>);
         }
-        
+
 
         return (
 
@@ -57,7 +57,7 @@ class RestaurantIndex extends Component{
                 onChange={this.handleChange('checkedB')}
                 value="checkedA"
                 color="Secondary"
-                />
+                /><p>Show/Hide Menu</p>
 
                 {this.state.checkedB ? <Menu id={this.state.id} /> : null}
                 <Ratings id={this.state.id}/>
