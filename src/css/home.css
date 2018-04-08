@@ -17,4 +17,5 @@
 .beveragebg, .starterbg, .dessertbg, .mainbg {
     background-size: cover;
     background-position: 0% 100%;
+    min-height: 300px;
 }

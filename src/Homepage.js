@@ -141,6 +141,7 @@ class Homepage extends Component {
         }
         const cardnobg={
             backgroundColor: "rgba(0,0,0,0.5)",
+            minHeight:"100%",
         }
 
         return(
@@ -148,7 +149,7 @@ class Homepage extends Component {
                 <div className="jumbotron">
                     <Slider {...sliderSettings}>
                         <div className="mainbg">
-                            <div className="card text-white" style={cardnobg}>
+                            <div className="card h-100 text-white" style={cardnobg}>
                                 <div className="card-header">
                                     <h1>Average prices of mains</h1>
                                 </div>
@@ -166,7 +167,7 @@ class Homepage extends Component {
                         </div>
 
                         <div className="starterbg">
-                            <div className="card text-white" style={cardnobg}>
+                            <div className="card h-100 text-white" style={cardnobg}>
                                 <div className="card-header">
                                     <h1>Average prices of starters</h1>
                                 </div>
@@ -184,7 +185,7 @@ class Homepage extends Component {
                         </div>
 
                         <div className="beveragebg">
-                            <div className="card text-white" style={cardnobg}>
+                            <div className="card h-100 text-white" style={cardnobg}>
                                 <div className="card-header">
                                     <h1>Average prices of beverages</h1>
                                 </div>
@@ -202,7 +203,7 @@ class Homepage extends Component {
                         </div>
 
                         <div className="dessertbg">
-                            <div className="card w-100 text-white" style={cardnobg}>
+                            <div className="card h-100 text-white" style={cardnobg}>
                                 <div className="card-header">
                                     <h1>Average prices of desserts</h1>
                                 </div>
