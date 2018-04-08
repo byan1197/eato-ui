@@ -84,7 +84,7 @@ class SearchBar extends Component{
                 )}
             </select>);
         }
-        else {
+        else if (this.state.searchType==='restaurantName'){
             
             
             
