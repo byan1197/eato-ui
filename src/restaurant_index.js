@@ -7,6 +7,7 @@ import registerServiceWorker from './registerServiceWorker';
 import Ratings from './Ratings';
 import Switches from './switch';
 import Switch from 'material-ui/Switch';
+import Menu from './Menu';
 
 
 class RestaurantIndex extends Component{
@@ -17,7 +18,7 @@ class RestaurantIndex extends Component{
             restaurant: null,
             locations: null,
             checkedA: false,
-            checkedB: true,
+            checkedB: false,
         }
 
         console.log(this.state.id);
@@ -30,9 +31,11 @@ class RestaurantIndex extends Component{
     }
     handleChange = name => event => {
         this.setState({ [name]: event.target.checked });
+
       };
 
     render(){
+        console.log(this.state.checkedB);
         const margin={
             margin:"5% 20% 5% 20%",
            //   backgroundColor: "rgba(255,255,255,0)",
@@ -42,7 +45,7 @@ class RestaurantIndex extends Component{
         if(this.state.restaurant == null || this.state.locations == null){
             return(<p>Loading</p>);
         }
-        console.log(this.state.checkedB);
+        
 
         return (
 
@@ -55,6 +58,8 @@ class RestaurantIndex extends Component{
                 value="checkedA"
                 color="Secondary"
                 />
+
+                {this.state.checkedB ? <Menu id={this.state.id} /> : null}
                 <Ratings id={this.state.id}/>
             </div>
         );
