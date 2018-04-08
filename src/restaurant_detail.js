@@ -46,7 +46,7 @@ class RestaurantDetail extends Component{
                     <div className="col-md-3">
                         <img className="asdf" src={this.props.restaurant.logoUrl} style={height}/>
                     </div>
-                    <div className="col-md-3 ">
+                    <div className="col-md-3">
                         <h1>{this.props.restaurant.name}</h1>
                         <p><b>Food rating:</b><br></br>
                             <StarRatingComponent
