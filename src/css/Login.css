@@ -1,9 +1,8 @@
 body{
-    /*background-image: url('https://fthmb.tqn.com/atGYf5Szeg2I_jZUcypsUxEr1lo=/960x0/filters:no_upscale()/GettyImages-182789593-5976401e9abed500113e1705.jpg');*/
-    /*background-color: #E8E9EB;*/
+    background-image: url('http://www.macleans.ca/wp-content/uploads/2015/07/13639244001_4306770221001_FINAL-RideauSkate-1920x1080.jpg');
     /*filter:blur(5px);*/
-    /*background-attachment: fixed;*/
     background-color: #ededed;
+    background-attachment: fixed;
 }
 
 .login-card{

@@ -81,7 +81,7 @@ class Login extends Component {
                 </div>
                 <div className="row">
                     <div className="login-container w-100 p-auto h-100">
-                        <div className="w-10 m-auto p-2 px-4 text-white login-card card">
+                        <div className="w-10 m-auto p-2 px-4 login-card card">
                             <form name="login" className="form-group" onSubmit={this.handleSubmit}>
                                 <h1>Login</h1>
                                 <input onChange={this.handleUsername} ref="username" className="mb-2 form-control" id="username" placeholder="Username"></input>
