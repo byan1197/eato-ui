@@ -176,14 +176,13 @@ class SearchBar extends Component{
                             <select onChange={event => this.handleSearchBarChange(event)} className="w-20 input-group form-control">
                                 <option selected value="">Start Browsing</option>
                                 <option value="restaurantName">Restaurants</option>
-                                <option value="locations">Locations</option>
-                                <option value="raters">Raters f</option>
-                                <option value="2015">Not 2015 g</option>
-                                <option value="lower">Lower than rater h</option>
-                                <option value="highest">Type with Highest Food</option>
-                                <option value="restaurantType">Restaurant Type</option>
-                                <option value="managerByCategory">Manager By Category</option>
-                                <option value="restaurantsLowerThan">Restaurants Lower Than:</option>
+                                <option disabled value="locations">Locations</option>
+                                <option value="raters"> Number of ratings of restaurants by raters (f)</option>
+                                <option value="Jan">Not Rated in 2015 January (g)</option>
+                                <option value="lower">Names and Dates of Restaurants with Staff Ratings Lower Than.. (h)</option>
+                                <option value="highest">Type with Highest Food (i)</option>
+                                <option disabled value="restaurantType">Restaurant Type</option>
+                                <option value="managerByCategory">Managers Names For Each Category of Restaurant (c)</option>
                             </select>
                             <div className="input-group-append">
                                 <button
