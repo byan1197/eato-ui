@@ -149,83 +149,89 @@ class Homepage extends Component {
 
         return(
             <div>
-                <div className="jumbotron" style={noColorBG}>
-                    <Slider {...sliderSettings}>
-                        <div className="mainbg">
-                            <div className="card h-100 text-white" style={cardnobg}>
-                                <div className="card-header">
-                                    <h1>Average prices of mains</h1>
-                                </div>
-                                <div className="container">
-                                    <div style={inline}>
-                                        {main.map((data, index)=>
-                                            <div className="col-md-2" >
-                                                <p><b>{data.type}</b></p>
-                                                <p>${data.avg}</p>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="starterbg">
-                            <div className="card h-100 text-white" style={cardnobg}>
-                                <div className="card-header">
-                                    <h1>Average prices of starters</h1>
-                                </div>
-                                <div className="container">
-                                    <div style={inline}>
-                                        {starter.map((data, index)=>
-                                            <div className="col-md-2" >
-                                                <p><b>{data.type}</b></p>
-                                                <p>${data.avg}</p>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="beveragebg">
-                            <div className="card h-100 text-white" style={cardnobg}>
-                                <div className="card-header">
-                                    <h1>Average prices of beverages</h1>
-                                </div>
-                                <div className="container">
-                                    <div style={inline}>
-                                        {beverage.map((data, index)=>
-                                            <div className="col-md-2" >
-                                                <p><b>{data.type}</b></p>
-                                                <p>${data.avg}</p>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="dessertbg">
-                            <div className="card h-100 text-white" style={cardnobg}>
-                                <div className="card-header">
-                                    <h1>Average prices of desserts</h1>
-                                </div>
-                                <div className="container">
-                                    <div style={inline}>
-                                        {dessert.map((data, index)=>
-                                            <div className="col-md-2" >
-                                                <p><b>{data.type}</b></p>
-                                                <p>${data.avg}</p>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </Slider>
-                </div>
-
                 <div className="container">
+
+                    <div className="jumbotron" style={noColorBG}>
+                        <Slider {...sliderSettings}>
+                            <div className="mainbg">
+                                <div className="card h-100 text-white" style={cardnobg}>
+                                    <div className="card-header">
+                                        <h1>Average prices of mains</h1>
+                                    </div>
+                                    <div className="container">
+                                        <div style={inline}>
+                                            {main.map((data, index)=>
+                                                <div className="col-md-2" >
+                                                    <p><b>{data.type}</b></p>
+                                                    <p>${data.avg}</p>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="starterbg">
+                                <div className="card h-100 text-white" style={cardnobg}>
+                                    <div className="card-header">
+                                        <h1>Average prices of starters</h1>
+                                    </div>
+                                    <div className="container">
+                                        <div style={inline}>
+                                            {starter.map((data, index)=>
+                                                <div className="col-md-2" >
+                                                    <p><b>{data.type}</b></p>
+                                                    <p>${data.avg}</p>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="beveragebg">
+                                <div className="card h-100 text-white" style={cardnobg}>
+                                    <div className="card-header">
+                                        <h1>Average prices of beverages</h1>
+                                    </div>
+                                    <div className="container">
+                                        <div style={inline}>
+                                            {beverage.map((data, index)=>
+                                                <div className="col-md-2" >
+                                                    <p><b>{data.type}</b></p>
+                                                    <p>${data.avg}</p>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="dessertbg">
+                                <div className="card h-100 text-white" style={cardnobg}>
+                                    <div className="card-header">
+                                        <h1>Average prices of desserts</h1>
+                                    </div>
+                                    <div className="container">
+                                        <div style={inline}>
+                                            {dessert.map((data, index)=>
+                                                <div className="col-md-2" >
+                                                    <p><b>{data.type}</b></p>
+                                                    <p>${data.avg}</p>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </Slider>
+                    </div>
+
+
+
+
+
+
                     <div className="row">
                         <div className="col-md-4">
                             <div className="card px-2 ">

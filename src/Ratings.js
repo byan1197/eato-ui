@@ -88,15 +88,12 @@ class Ratings extends Component {
     }
 
     getRatings(){
-        // axios.get('http://localhost:7000/rate/?restid={this.state.restId}')
         axios.get(`http://localhost:7000/rate/?restid=${this.state.restId}`)
         .then((response)=>{
             console.log(response);
             this.setState({
                 ratingList: response.data,
             });
-            console.log('from getRatings()');
-            console.log(this.state.ratingList);
         });
     }
 
@@ -201,11 +198,13 @@ class Ratings extends Component {
     upvote(raterid){
         console.log('upvoted!');
         axios.get(`http://localhost:7000/upvote-rater/?&raterid=${raterid}`)
+        this.getRatings();
     }
 
     downvote(raterid){
         console.log('downvoted!');
         axios.get(`http://localhost:7000/downvote-rater/?raterid=${raterid}`)
+        this.getRatings();
     }
 
     render(){
