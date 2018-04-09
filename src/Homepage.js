@@ -233,21 +233,21 @@ class Homepage extends Component {
 
 
                     <div className="row">
-                        <div className="col-md-4">
+                        <div className="col-lg-4 col-md-12 col-xs-12">
                             <div className="card px-2 ">
                                 <h4 className="text-secondary">Highest Raters</h4>
                                 <p>(Based off of Food AND Mood)</p>
                                 <JSONToTable json={this.state.hfam}/>
                             </div>
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-lg-4 col-md-12 col-xs-12">
                             <div className="px-2 card">
                                 <h4 className="text-secondary">Highest Raters</h4>
                                 <p>(Based off of Food OR Mood)</p>
                                 <JSONToTable json={this.state.hfom} />
                             </div>
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-lg-4 col-md-12 col-xs-12">
                             <div className="px-2 card">
                                 <h4 className="text-secondary">Highest Food Ratings</h4>
                                 <p>Based on type of restaurant</p>
