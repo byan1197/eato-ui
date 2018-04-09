@@ -45,7 +45,7 @@ class RestaurantResult extends Component{
                         <h5 className="card-title">{restaurant.name}</h5>
                             <div className="row" >
                                 <div className="col-md-6">
-                                    <p className="card-text" >Food:<br/>
+                                    <p className="card-text card-rating" >Food:<br/>
                                     <StarRatingComponent
                                         name="moodRating"/* name of the radio input, it is required */
                                         value={restaurant.foodRating} /* number of selected icon (`0` - none, `1` - first) */
@@ -54,7 +54,7 @@ class RestaurantResult extends Component{
                                     </p>
                                 </div>
                                 <div className="col-md-6">
-                                    <p className="card-text">Price:<br/>
+                                    <p className="card-text card-rating">Price:<br/>
                                     <StarRatingComponent
                                         name="moodRating"/* name of the radio input, it is required */
                                         value={restaurant.priceRating} /* number of selected icon (`0` - none, `1` - first) */
@@ -65,7 +65,7 @@ class RestaurantResult extends Component{
                             </div>
                             <div className="row">
                                 <div className="col-md-6">
-                                    <p className="card-text">Mood:<br/>
+                                    <p className="card-text card-rating">Mood:<br/>
                                     <StarRatingComponent
                                         name="moodRating"/* name of the radio input, it is required */
                                         value={restaurant.moodRating} /* number of selected icon (`0` - none, `1` - first) */
@@ -74,7 +74,7 @@ class RestaurantResult extends Component{
                                     </p>
                                 </div>
                                 <div className="col-md-6">
-                                    <p className="card-text">Staff:<br/>
+                                    <p className="card-text card-rating">Staff:<br/>
                                     <StarRatingComponent
                                         name="moodRating"/* name of the radio input, it is required */
                                         value={restaurant.staffRating} /* number of selected icon (`0` - none, `1` - first) */
