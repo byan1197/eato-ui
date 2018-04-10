@@ -136,15 +136,6 @@ class App extends Component{
 
         })
 
-        // else if(type=='raters'){
-        //     axios.get(`http://localhost:7000/totalratingrest/`)
-        //     .then((response) => {
-        //         this.setState({
-        //             modalData: response.data
-        //         });
-
-        //     })
-        // }
 
     }
 }

@@ -5,6 +5,7 @@ import './css/nav.css';
 import FontAwesome from 'react-fontawesome';
 import axios from 'axios';
 import Modal from 'react-modal';
+import {BrowserRouter as Router, Link, Redirect} from 'react-router-dom';
 
 class SearchBar extends Component{
     constructor(props){
@@ -218,6 +219,10 @@ class SearchBar extends Component{
                         }
 
                     </ul>
+                    <Link to= '/deleterestau'><button className="nav-bar-btn btn btn-warning mx-2"><FontAwesome />Delete Restaurant</button></Link>
+                    <Link to= '/addrestau'><button className="nav-bar-btn btn btn-warning mx-2"><FontAwesome />Add Restaurant</button></Link>
+                    
+
                 </div>
                 </div>
             </div>
