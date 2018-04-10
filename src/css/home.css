@@ -27,3 +27,15 @@ body{
 .btn, .form-control {
     border-radius: 25px;
 }
+
+.dropdown-menu {
+    background-color: rgba(0,0,0,0);
+    border: none;
+}
+
+.dropdown-item:hover{
+    color: #16181b;
+    text-decoration: none;
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 25px;
+}
