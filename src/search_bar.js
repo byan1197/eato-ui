@@ -6,6 +6,7 @@ import FontAwesome from 'react-fontawesome';
 import axios from 'axios';
 import Modal from 'react-modal';
 import {BrowserRouter as Router, Link, Redirect} from 'react-router-dom';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 class SearchBar extends Component{
     constructor(props){
@@ -18,7 +19,18 @@ class SearchBar extends Component{
             lowerDropdown: null,
             renderCards: false,
             input: 'lebanese',
+            dropdownOpen: false,
         };
+            console.log('in constructor');
+            console.log(this.state.dropdownOpen);
+    }
+
+    toggle() {
+        console.log('in toggle');
+        console.log(this.state.dropdownOpen);
+      this.setState({
+        dropdownOpen: !(this.state.dropdownOpen),
+      });
     }
 
     handleSearchBarChange = event => {
@@ -211,17 +223,23 @@ class SearchBar extends Component{
                                 <a className="btn btn-warning mx-2" href="/login">Log In<FontAwesome name="sign-in-alt"/><span className="sr-only"></span>
                                 </a>
                             </li>:
-                            <li className="nav-btn-group nav-item active">
-                                <button onClick={()=>{this.delete()}} className="nav-bar-btn btn btn-danger mx-2"><FontAwesome name="trash-alt"/>Delete My Account</button>
-                                <button className="nav-bar-btn btn btn-warning mx-2"><FontAwesome name="user"/>My Profile</button>
-                                <button onClick={()=>{this.logout()}} className="nav-bar-btn btn text-white btn-dark mr-2"> <FontAwesome name="sign-out"/>Logout</button>
+                            <li className="nav-item ml-2">
+                                <Dropdown isOpen={this.state.dropdownOpen} toggle={()=>this.toggle()}>
+                                  <DropdownToggle caret>
+                                    Rater Actions
+                                  </DropdownToggle>
+                                  <DropdownMenu>
+                                    <DropdownItem><button onClick={()=>{this.delete()}} className="nav-bar-btn btn btn-danger"><FontAwesome name="trash-alt"/>Delete My Account</button></DropdownItem>
+                                    <DropdownItem><button className="nav-bar-btn btn btn-warning"><FontAwesome name="user"/>My Profile</button></DropdownItem>
+                                    <DropdownItem><button onClick={()=>{this.logout()}} className="nav-bar-btn btn text-white btn-dark"> <FontAwesome name="sign-out"/>Logout</button></DropdownItem>
+                                    <DropdownItem><Link to= '/deleterestau'><button className="nav-bar-btn btn btn-warning"><FontAwesome />Delete Restaurant</button></Link></DropdownItem>
+                                    <DropdownItem><Link to= '/addrestau'><button className="nav-bar-btn btn btn-warning"><FontAwesome />Add Restaurant</button></Link></DropdownItem>
+                                  </DropdownMenu>
+                                </Dropdown>
                             </li>
                         }
-
                     </ul>
-                    <Link to= '/deleterestau'><button className="nav-bar-btn btn btn-warning mx-2"><FontAwesome />Delete Restaurant</button></Link>
-                    <Link to= '/addrestau'><button className="nav-bar-btn btn btn-warning mx-2"><FontAwesome />Add Restaurant</button></Link>
-                    
+
 
                 </div>
                 </div>
