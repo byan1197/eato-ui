@@ -7,6 +7,7 @@ import registerServiceWorker from './registerServiceWorker';
 import Modal from 'react-modal';
 import JSONToTable from './JSONToTable';
 import Homepage from './Homepage';
+import FontAwesome from 'react-fontawesome';
 // import './css/modal.css';
 
 const customStyles = {
@@ -68,6 +69,8 @@ class App extends Component{
 
         </Modal>
       </div>
+      <h1 className="text-warning ml-4"><FontAwesome name="angle-double-right"/>pnb inc.</h1>
+
             </div>
 
         );

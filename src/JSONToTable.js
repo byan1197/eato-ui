@@ -14,13 +14,13 @@ const JSONToTable = (props) => {
     names.rating='Ratings';
 
 
-    console.log(this.props);
-    for (var s in props.json[0]){
-        tableHeaders.push(s);
-    }
 
     if(props.json.length == 0){
         return(<h1 className="text-secondary">No results found.</h1>)
+    }
+    
+    for (var s in props.json[0]){
+        tableHeaders.push(s);
     }
 
     return(

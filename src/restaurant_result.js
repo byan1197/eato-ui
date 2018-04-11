@@ -39,7 +39,7 @@ class RestaurantResult extends Component{
 
                 <div key={index} className="card restau-card m-4 col-md-2 col-sm-6 p-0">
              <Link to = {`/restaurant-index/${restaurant.restaurantId}`} >
-                    <img className="card-img-top food-img" src={restaurant.picUrl == (null || "" || '') ? "http://prachyanat.org/wp-content/uploads/2014/08/placeholder1-300x300.jpg" : restaurant.picUrl}></img>
+                    <img className="card-img-top food-img" src={restaurant.picUrl === (null) ? "http://prachyanat.org/wp-content/uploads/2014/08/placeholder1-300x300.jpg" : restaurant.picUrl}></img>
                     </Link>
                         <div className="card-body" >
                         <h5 className="card-title">{restaurant.name}</h5>

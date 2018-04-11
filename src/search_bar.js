@@ -99,7 +99,7 @@ class SearchBar extends Component{
         }
         else if (this.state.searchType==='restaurantName'){
 
-
+            console.log('search type is restau name');
 
             return(<input type="text"
                 className="input-group-prepend form-control w-75 border-right-0"
@@ -165,7 +165,7 @@ class SearchBar extends Component{
 
     handleSearch(){
         if (this.state.searchType == 'restaurantName'){
-
+            this.props.onSearchTermChange(this.props.onSearchTermChange(this.state.term));
 
         }
 
@@ -230,10 +230,10 @@ class SearchBar extends Component{
                                   </DropdownToggle>
                                   <DropdownMenu>
                                     <DropdownItem><button onClick={()=>{this.delete()}} className="nav-bar-btn btn btn-danger"><FontAwesome name="trash-alt"/>Delete My Account</button></DropdownItem>
-                                    <DropdownItem><button className="nav-bar-btn btn btn-warning"><FontAwesome name="user"/>My Profile</button></DropdownItem>
+                                    <DropdownItem><button disabled className="nav-bar-btn btn btn-warning"><FontAwesome name="user"/>My Profile</button></DropdownItem>
                                     <DropdownItem><button onClick={()=>{this.logout()}} className="nav-bar-btn btn text-white btn-dark"> <FontAwesome name="sign-out"/>Logout</button></DropdownItem>
                                     <DropdownItem><Link to= '/deleterestau'><button className="nav-bar-btn btn btn-warning"><FontAwesome />Delete Restaurant</button></Link></DropdownItem>
-                                    <DropdownItem><Link to= '/addrestau'><button className="nav-bar-btn btn btn-warning"><FontAwesome />Add Restaurant</button></Link></DropdownItem>
+                                    <DropdownItem><Link to= '/addrestau'><button className="nav-bar-btn btn btn-success"><FontAwesome />Add Restaurant</button></Link></DropdownItem>
                                   </DropdownMenu>
                                 </Dropdown>
                             </li>

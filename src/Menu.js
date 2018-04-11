@@ -80,6 +80,14 @@ class Menu extends Component{
         })
     }
 
+    deleteMenuItem(itemid){
+        axios.get(`http://localhost:7000/deletemenuitem/?itemid=${itemid}`)
+        .then((response) =>{
+            console.log(response);
+            this.forceUpdate();
+        })
+    }
+
     getMenuInCats(){
         const allCats = ['BEVERAGE', 'DESSERT', 'STARTER', 'MAIN'];
         const allItems = this.state.menu;
@@ -212,6 +220,7 @@ class Menu extends Component{
                                     <th>Description</th>
                                     <th>View Ratings</th>
                                     <th>Submit Your Own Rating</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -222,6 +231,7 @@ class Menu extends Component{
                                         <td>{row.description}</td>
                                         <td><button onClick={() => this.openModal(row.itemId, false)} className="btn btn-outline-primary">View</button></td>
                                         <td><button onClick={() => this.openModal(row.itemId, true)} className="btn btn-outline-success">Rate It!</button></td>
+                                        <td><button onClick={() => this.deleteMenuItem(row.itemId)} className="btn btn-outline-danger">Delete</button></td>
                                     </tr>
                                 )}
                             </tbody>
@@ -248,6 +258,7 @@ class Menu extends Component{
                                         <td>{row.description}</td>
                                         <td><button onClick={() => this.openModal(row.itemId, false)} className="btn btn-outline-primary">View</button></td>
                                         <td><button onClick={() => this.openModal(row.itemId, true)} className="btn btn-outline-success">Rate It!</button></td>
+                                        <td><button onClick={() => this.deleteMenuItem(row.itemId)} className="btn btn-outline-danger">Delete</button></td>
                                     </tr>
                                 )}
                             </tbody>
@@ -274,6 +285,7 @@ class Menu extends Component{
                                         <td>{row.description}</td>
                                         <td><button onClick={() => this.openModal(row.itemId, false)} className="btn btn-outline-primary">View</button></td>
                                         <td><button onClick={() => this.openModal(row.itemId, true)} className="btn btn-outline-success">Rate It!</button></td>
+                                        <td><button onClick={() => this.deleteMenuItem(row.itemId)} className="btn btn-outline-danger">Delete</button></td>
                                     </tr>
                                 )}
                             </tbody>
@@ -300,6 +312,7 @@ class Menu extends Component{
                                         <td>{row.description}</td>
                                         <td><button onClick={() => this.openModal(row.itemId, false)} className="btn btn-outline-primary">View</button></td>
                                         <td><button onClick={() => this.openModal(row.itemId, true)} className="btn btn-outline-success">Rate It!</button></td>
+                                        <td><button onClick={() => this.deleteMenuItem(row.itemId)} className="btn btn-outline-danger">Delete</button></td>
                                     </tr>
                                 )}
                             </tbody>

@@ -33,7 +33,7 @@ class DeleteRestau extends Component {
     
 
     handleDelete = event => {
-
+        console.log("dsfhdsjf" + this.state.delete);
         axios.get(`http://localhost:7000/deleterestau?restauid=${this.state.delete}`)
         .then(response => {
             console.log(response.status);
@@ -54,7 +54,7 @@ class DeleteRestau extends Component {
 
         var obj = _.find(this.state.restaurants, function (obj) { return obj.name === event.target.value; });
         
-        // var toDelete = objrestaurantId;
+        console.log(obj);
         this.state.delete = obj.restaurantId;
 
        

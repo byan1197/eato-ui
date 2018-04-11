@@ -245,7 +245,7 @@ class Homepage extends Component {
                                 <h4 className="text-secondary">Highest Raters</h4>
                                 <p>(Based off of Food OR Mood)</p>
                                 <JSONToTable json={this.state.hfom} />
-                            </div>eato
+                            </div>
                         </div>
                         <div className="col-lg-4 col-md-12 col-xs-12">
                             <div className="px-2 card">
@@ -256,10 +256,10 @@ class Homepage extends Component {
                         </div>
                     </div>
                 </div>
-
             </div>
         );
     }
+
 
 }
 export default Homepage

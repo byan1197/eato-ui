@@ -6,6 +6,8 @@ import axios from 'axios';
 
 class Signup extends Component {
 
+    
+    
     state = {
         username: '',
         password: '',
@@ -18,6 +20,7 @@ class Signup extends Component {
         errorMsg: '',
     }
 
+    
     handlePassword = event => {
         this.setState({password: event.target.value});
     }
